@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riyaaz Sir | Study Portal</title>
+    <title id="page-title">Study Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,18 +11,17 @@
             --primary-dark: #4f46e5;
             --secondary: #ec4899;
             --bg: #f8fafc;
-            --bg-card: rgba(255,255,255,0.8);
+            --bg-card: rgba(255,255,255,0.85);
             --text: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
             --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
         }
         
         [data-theme="dark"] {
             --bg: #0f172a;
-            --bg-card: rgba(30,41,59,0.8);
+            --bg-card: rgba(30,41,59,0.85);
             --text: #f1f5f9;
             --text-muted: #94a3b8;
             --border: #334155;
@@ -35,58 +34,85 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            transition: background 0.3s, color 0.3s;
+            transition: all 0.3s;
         }
         
         /* Animated Background */
         .bg-animation {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             overflow: hidden;
+            background: var(--bg);
         }
         
         .bg-animation::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(99,102,241,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
-            animation: float 20s infinite linear;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236,72,153,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
+            animation: bgFloat 25s infinite linear;
         }
         
-        @keyframes float {
+        @keyframes bgFloat {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(2%, 2%) rotate(90deg); }
-            50% { transform: translate(0, 4%) rotate(180deg); }
-            75% { transform: translate(-2%, 2%) rotate(270deg); }
+            33% { transform: translate(2%, 2%) rotate(120deg); }
+            66% { transform: translate(-1%, 3%) rotate(240deg); }
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px; right: 20px;
+            z-index: 1000;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(20deg);
+            box-shadow: var(--shadow-lg);
         }
         
         /* Hero Section */
         .hero {
-            background: var(--gradient);
-            padding: 80px 20px 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 80px 20px 130px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
         .hero::after {
             content: '';
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 80px;
+            bottom: -2px; left: 0;
+            width: 100%; height: 80px;
             background: var(--bg);
-            clip-path: ellipse(60% 100% at 50% 100%);
+            clip-path: ellipse(55% 100% at 50% 100%);
         }
         
         .hero-content {
@@ -94,16 +120,28 @@
             z-index: 2;
         }
         
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
         .hero h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
             color: white;
             margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
         }
         
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: rgba(255,255,255,0.9);
             max-width: 500px;
             margin: 0 auto;
@@ -112,8 +150,8 @@
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 50px;
+            margin-top: 35px;
         }
         
         .stat {
@@ -121,45 +159,21 @@
         }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         
         .stat-label {
             font-size: 0.85rem;
             color: rgba(255,255,255,0.8);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
         
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        /* Main Container */
+        /* Container */
         .container {
             max-width: 1200px;
             margin: -60px auto 40px;
@@ -173,8 +187,8 @@
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 24px;
             box-shadow: var(--shadow-lg);
             margin-bottom: 40px;
         }
@@ -185,8 +199,7 @@
         
         .search-icon {
             position: absolute;
-            left: 20px;
-            top: 50%;
+            left: 22px; top: 50%;
             transform: translateY(-50%);
             font-size: 1.2rem;
             color: var(--text-muted);
@@ -196,7 +209,7 @@
             width: 100%;
             padding: 18px 20px 18px 55px;
             border: 2px solid var(--border);
-            border-radius: 15px;
+            border-radius: 16px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
             background: var(--bg);
@@ -207,12 +220,10 @@
         .search-bar:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
         }
         
-        .search-bar::placeholder {
-            color: var(--text-muted);
-        }
+        .search-bar::placeholder { color: var(--text-muted); }
         
         /* Filter Tags */
         .filter-tags {
@@ -223,35 +234,56 @@
         }
         
         .filter-tag {
-            padding: 8px 16px;
+            padding: 10px 18px;
             background: var(--bg);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: 30px;
             font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .filter-tag:hover, .filter-tag.active {
-            background: var(--primary);
-            color: white;
+        .filter-tag:hover {
             border-color: var(--primary);
+            color: var(--primary);
         }
         
-        /* Grid */
+        .filter-tag.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* Section Title */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
         .section-title {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 25px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
+        .paper-count {
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        
+        /* Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
         
@@ -260,8 +292,8 @@
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            padding: 28px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 24px;
             box-shadow: var(--shadow);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
@@ -273,22 +305,22 @@
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
-            opacity: 0;
-            transition: opacity 0.3s;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
         }
         
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
         
         .card:hover::before {
-            opacity: 1;
+            transform: scaleX(1);
         }
         
         .card-header {
@@ -301,9 +333,9 @@
         .tag {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px 14px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+            gap: 6px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.15));
             color: var(--primary);
             border-radius: 30px;
             font-size: 0.75rem;
@@ -315,22 +347,25 @@
         .new-badge {
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.7rem;
             font-weight: 700;
             animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
         }
         
         .title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--text);
             line-height: 1.4;
         }
@@ -346,104 +381,126 @@
         .meta {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             font-size: 0.8rem;
             color: var(--text-muted);
             margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
         }
         
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         
         .download-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: var(--gradient);
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 14px 20px;
+            padding: 16px 24px;
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+            box-shadow: 0 4px 15px rgba(99,102,241,0.4);
         }
         
         .download-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.5);
         }
         
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             grid-column: 1 / -1;
         }
         
         .empty-state-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             margin-bottom: 20px;
+            opacity: 0.8;
         }
         
         .empty-state h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
+            color: var(--text);
         }
         
         .empty-state p {
             color: var(--text-muted);
+            font-size: 1.1rem;
         }
         
         /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border-top: 1px solid var(--border);
-            margin-top: 60px;
+            margin-top: 80px;
         }
         
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero { padding: 60px 20px 100px; }
-            .hero-stats { gap: 25px; }
-            .stat-number { font-size: 1.8rem; }
-            .grid { grid-template-columns: 1fr; }
-            .container { margin-top: -40px; }
-        }
-        
-        /* Loading Animation */
-        .loading {
+        .footer-links {
+            margin-top: 15px;
             display: flex;
             justify-content: center;
+            gap: 25px;
+        }
+        
+        .footer-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
             align-items: center;
-            padding: 60px;
+            gap: 6px;
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary);
+        }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px;
             grid-column: 1 / -1;
+            gap: 20px;
         }
         
         .spinner {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border: 4px solid var(--border);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 20px 110px; }
+            .hero-stats { gap: 30px; }
+            .stat-number { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .container { margin-top: -50px; }
+            .section-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+            .footer-links { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
@@ -456,8 +513,9 @@
     
     <div class="hero">
         <div class="hero-content">
-            <h1>👨‍🏫 Riyaaz Sir's Portal</h1>
-            <p>Your gateway to success. Download premium study materials and ace your exams!</p>
+            <div class="hero-icon">👨‍🏫</div>
+            <h1 id="site-name">Study Portal</h1>
+            <p id="site-tagline">Your gateway to academic excellence!</p>
             <div class="hero-stats">
                 <div class="stat">
                     <div class="stat-number" id="total-papers">0</div>
@@ -475,32 +533,40 @@
         <div class="search-section">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="search" class="search-bar" placeholder="Search papers by name or subject..." onkeyup="filterPapers()">
+                <input type="text" id="search" class="search-bar" placeholder="Search papers by name, subject, or description..." onkeyup="filterPapers()">
             </div>
             <div class="filter-tags" id="filter-tags">
-                <span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>
+                <span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>
             </div>
         </div>
         
-        <h2 class="section-title">📄 Available Papers</h2>
+        <div class="section-header">
+            <h2 class="section-title">📄 Available Papers</h2>
+            <span class="paper-count" id="showing-count">Showing 0 papers</span>
+        </div>
         
         <div class="grid" id="paper-grid">
             <div class="loading">
                 <div class="spinner"></div>
+                <p>Loading papers...</p>
             </div>
         </div>
     </div>
     
     <div class="footer">
-        <p>Made with ❤️ for <strong>Riyaaz Sir's Students</strong></p>
-        <p style="margin-top: 5px; font-size: 0.8rem;">© 2024 All rights reserved</p>
+        <p id="footer-text">Made with ❤️ for Students</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">© 2024 All rights reserved</p>
+        <div class="footer-links">
+            <a href="admin.html" class="footer-link">🔐 Admin Portal</a>
+        </div>
     </div>
     
     <script>
         let allPapers = [];
+        let siteConfig = {};
         let currentFilter = 'all';
         
-        // Theme Management
+        // Theme
         function initTheme() {
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', saved);
@@ -517,6 +583,36 @@
         
         function updateThemeIcon(theme) {
             document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // Load Config
+        async function loadConfig() {
+            try {
+                const res = await fetch('config.json?t=' + Date.now());
+                siteConfig = await res.json();
+                applyConfig();
+            } catch (e) {
+                console.log("Using default config");
+            }
+        }
+        
+        function applyConfig() {
+            if (siteConfig.siteName) {
+                document.getElementById('site-name').textContent = siteConfig.siteName;
+                document.getElementById('page-title').textContent = siteConfig.siteName;
+            }
+            if (siteConfig.siteTagline) {
+                document.getElementById('site-tagline').textContent = siteConfig.siteTagline;
+            }
+            if (siteConfig.footerText) {
+                document.getElementById('footer-text').textContent = siteConfig.footerText;
+            }
+            if (siteConfig.primaryColor) {
+                document.documentElement.style.setProperty('--primary', siteConfig.primaryColor);
+            }
+            if (siteConfig.secondaryColor) {
+                document.documentElement.style.setProperty('--secondary', siteConfig.secondaryColor);
+            }
         }
         
         // Load Papers
@@ -547,13 +643,15 @@
         
         function buildFilterTags() {
             const visible = allPapers.filter(p => p.visible !== false);
-            const subjects = [...new Set(visible.map(p => p.subject))];
+            const subjects = [...new Set(visible.map(p => p.subject))].sort();
             const container = document.getElementById('filter-tags');
             
-            container.innerHTML = `<span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>`;
+            container.innerHTML = `<span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>`;
             
-            subjects.forEach(sub => {
-                container.innerHTML += `<span class="filter-tag" data-subject="${sub}" onclick="filterBySubject('${sub}', this)">${sub}</span>`;
+            const icons = ['📐', '🔬', '🧪', '📖', '🌍', '💻', '🎨', '📊', '🧮', '🔢'];
+            subjects.forEach((sub, i) => {
+                const icon = icons[i % icons.length];
+                container.innerHTML += `<span class="filter-tag" onclick="filterBySubject('${sub}', this)">${icon} ${sub}</span>`;
             });
         }
         
@@ -581,6 +679,7 @@
             }
             
             renderPapers(filtered);
+            document.getElementById('showing-count').textContent = `Showing ${filtered.length} paper${filtered.length !== 1 ? 's' : ''}`;
         }
         
         function isNew(timestamp) {
@@ -604,9 +703,7 @@
             
             grid.innerHTML = papers.map(paper => {
                 const date = new Date(paper.id).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric' 
+                    year: 'numeric', month: 'short', day: 'numeric' 
                 });
                 
                 return `
@@ -616,21 +713,24 @@
                             ${isNew(paper.id) ? '<span class="new-badge">✨ NEW</span>' : ''}
                         </div>
                         <h3 class="title">${paper.name}</h3>
-                        <p class="description">${paper.description || 'Download this sample paper to boost your preparation!'}</p>
+                        <p class="description">${paper.description || 'Download this sample paper to boost your exam preparation!'}</p>
                         <div class="meta">
                             <span class="meta-item">📅 ${date}</span>
-                            <span class="meta-item">📄 PDF</span>
+                            <span class="meta-item">📄 PDF Document</span>
                         </div>
                         <a href="${paper.link}" class="download-btn" download>
-                            <span>📥</span> Download Now
+                            📥 Download Now
                         </a>
                     </div>
                 `;
             }).join('');
+            
+            document.getElementById('showing-count').textContent = `Showing ${papers.length} paper${papers.length !== 1 ? 's' : ''}`;
         }
         
-        // Initialize
+        // Init
         initTheme();
+        loadConfig();
         loadPapers();
     </script>
 </body>

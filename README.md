@@ -4,93 +4,70 @@
 
 ---
 
+## 🔐 Default Admin Credentials
+
+| Field | Default Value |
+|-------|---------------|
+| **Username** | `riyaazsir` |
+| **Password** | `admin123` |
+
+⚠️ **IMPORTANT:** Change these immediately after first login!
+
+---
+
 ## 🌟 Student Portal Features
 
-| Feature | Description |
-|---------|-------------|
-| 🎨 **Beautiful UI** | Modern glassmorphism design with smooth animations |
-| 🔍 **Smart Search** | Instantly search papers by name or subject |
-| 🏷️ **Subject Tags** | Color-coded tags for easy identification |
-| 📅 **Upload Dates** | See when each paper was uploaded |
-| 📱 **Fully Responsive** | Works perfectly on mobile, tablet, and desktop |
-| 🌙 **Dark/Light Mode** | Toggle between themes (saved automatically) |
-| ⚡ **Instant Downloads** | One-click PDF downloads |
-| 🔢 **Paper Counter** | Shows total available papers |
+- 🎨 Beautiful glassmorphism UI with animations
+- 🌙 Dark/Light mode toggle
+- 🔍 Live search by name or subject
+- 🏷️ Filter tags by subject
+- ✨ "NEW" badge for recent papers
+- 📊 Live paper & subject counter
+- 📱 Fully responsive design
+- 🔗 Quick admin access link
 
 ---
 
-## 🔐 Admin Dashboard Features
+## ⚙️ Admin Dashboard Features
 
-| Feature | Description |
-|---------|-------------|
-| 🔒 **Secure Login** | GitHub Token authentication |
-| 💾 **Remember Me** | Token saved securely in browser |
-| 📤 **Easy Upload** | Upload PDFs with name, subject, and description |
-| ✏️ **Edit Papers** | Change name, subject, or description anytime |
-| 🔄 **Replace PDF** | Swap out old PDFs without changing the listing |
-| 👁️ **Hide/Show** | Temporarily hide papers from students |
-| 🗑️ **Delete Forever** | Permanently remove papers |
-| 📊 **Stats Dashboard** | See total papers, live count, hidden count |
-| 🎨 **Dark Theme** | Easy on the eyes for late-night work |
-| 📋 **Activity Log** | See recent actions |
-
----
-
-## 🚀 How to Use
-
-### For Students:
-Simply visit: `https://YOUR-USERNAME.github.io/sample-papers/`
-
-### For Admin (Riyaaz Sir):
-1. Visit: `https://YOUR-USERNAME.github.io/sample-papers/admin.html`
-2. Enter your GitHub Personal Access Token
-3. Start uploading and managing papers!
+- 🔒 Username + Password authentication
+- 📤 Upload papers with name, subject, description
+- ✏️ Edit paper details anytime
+- 🔄 Replace PDF files
+- 👁️ Hide/Show papers
+- 🗑️ Delete papers permanently
+- 📊 Live statistics dashboard
+- ⚙️ **Settings Panel:**
+  - Change admin username
+  - Change admin password
+  - Change site name & tagline
+  - Change GitHub repo settings
+  - Change theme colors
+  - Change footer text
 
 ---
 
-## 🔑 How to Get Your Admin Token
+## 🚀 Quick Start
 
-1. Go to GitHub → Click your Profile Picture → **Settings**
-2. Scroll down → **Developer Settings** → **Personal Access Tokens** → **Tokens (classic)**
-3. Click **Generate new token (classic)**
-4. Name: `LMS Admin Key`
-5. Expiration: `No expiration`
-6. Scopes: Check `repo` (full control)
-7. Click **Generate token**
-8. **COPY AND SAVE IT SECURELY!**
+1. Visit: `https://YOUR-USERNAME.github.io/sample-papers/`
+2. Click "Admin Portal" link at bottom
+3. Login with default credentials
+4. **Change your password immediately!**
+5. Start uploading papers!
 
 ---
 
-## 📁 File Structure
+## 🔑 Getting Your GitHub Token
 
-```
-sample-papers/
-├── index.html      # Student Portal
-├── admin.html      # Admin Dashboard
-├── papers.json     # Database
-├── papers/         # PDF Storage (auto-created)
-└── README.md       # This file
-```
-
----
-
-## ⚙️ Configuration
-
-To change the repository owner, edit `admin.html` line ~180:
-```javascript
-const REPO = 'YOUR-USERNAME/sample-papers';
-```
+1. GitHub → Profile → Settings
+2. Developer Settings → Personal Access Tokens → Tokens (classic)
+3. Generate new token (classic)
+4. Name: `LMS Admin`
+5. Expiration: No expiration
+6. Scopes: Check `repo`
+7. Generate & copy the token
+8. Enter it in Admin Dashboard settings
 
 ---
 
-## 💡 Tips for Riyaaz Sir
-
-1. **Bookmark the admin page** for quick access
-2. **Use descriptive names** like "Class 10 - Physics - 2024 Boards"
-3. **Use consistent subjects** like "Physics", "Chemistry", "Maths"
-4. **Hide papers** before exams, then reveal them after
-5. **Replace PDFs** if you find errors - students won't notice!
-
----
-
-Made with ❤️ for Riyaaz Sir's Students
+Made with ❤️ for Riyaaz Sir

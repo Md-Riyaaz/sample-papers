@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Riyaaz Sir</title>
+    <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,6 +15,7 @@
             --border: #334155;
             --primary: #6366f1;
             --primary-hover: #4f46e5;
+            --secondary: #ec4899;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
@@ -31,12 +32,6 @@
             line-height: 1.6;
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
         /* Login Screen */
         .login-container {
             min-height: 100vh;
@@ -44,16 +39,23 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
         
         .login-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 50px 40px;
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        
+        .login-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
         }
         
         .login-box h1 {
@@ -64,63 +66,70 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .login-box p {
+        .login-box > p {
             color: var(--text-muted);
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            font-size: 0.95rem;
         }
         
         /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
         input, select, textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: 16px 20px;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             background: var(--bg-input);
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: all 0.3s;
-            margin-bottom: 15px;
         }
         
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
         }
         
-        input::placeholder, textarea::placeholder {
-            color: var(--text-muted);
-        }
-        
-        label {
-            display: block;
-            text-align: left;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        input::placeholder, textarea::placeholder { color: var(--text-muted); }
         
         button {
             width: 100%;
-            padding: 14px 20px;
+            padding: 16px 24px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: var(--gradient);
             color: white;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         button:hover {
             opacity: 0.9;
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.3);
         }
         
         button:disabled {
@@ -129,7 +138,27 @@
             transform: none;
         }
         
-        /* Dashboard Header */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover { color: var(--primary); }
+        
+        /* Dashboard */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -137,26 +166,33 @@
             padding: 25px 30px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             margin-bottom: 25px;
         }
         
-        .header h1 {
-            font-size: 1.5rem;
+        .header-left h1 {
+            font-size: 1.6rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+        
+        .header-left p {
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-size: 0.9rem;
         }
         
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         
-        .btn-sm {
-            width: auto;
-            padding: 10px 20px;
+        .btn {
+            padding: 12px 20px;
             font-size: 0.9rem;
+            border-radius: 12px;
+            width: auto;
         }
         
         .btn-outline {
@@ -167,20 +203,52 @@
         
         .btn-outline:hover {
             background: var(--border);
+            transform: none;
+            box-shadow: none;
         }
         
-        .btn-danger {
-            background: var(--danger);
+        .btn-danger { background: var(--danger); }
+        .btn-success { background: var(--success); }
+        .btn-warning { background: var(--warning); color: #000; }
+        .btn-primary { background: var(--primary); }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: var(--bg-card);
+            padding: 8px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
         }
         
-        .btn-success {
-            background: var(--success);
+        .tab {
+            flex: 1;
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
-        .btn-warning {
-            background: var(--warning);
-            color: #000;
+        .tab:hover { color: var(--text); background: var(--bg); }
+        
+        .tab.active {
+            background: var(--gradient);
+            color: white;
         }
+        
+        /* Tab Content */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
         
         /* Stats Grid */
         .stats-grid {
@@ -193,18 +261,24 @@
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 25px;
             text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
         }
         
         .stat-card .icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
         }
         
         .stat-card .number {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: var(--gradient);
             -webkit-background-clip: text;
@@ -216,34 +290,39 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 5px;
         }
         
         /* Cards */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 30px;
             margin-bottom: 25px;
         }
         
         .card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
         }
         
         .upload-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
         
         /* Table */
         .table-container {
             overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
         
         table {
@@ -252,32 +331,32 @@
         }
         
         th, td {
-            padding: 16px;
+            padding: 18px 16px;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
         
         th {
+            background: var(--bg);
             color: var(--text-muted);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
+            font-weight: 700;
         }
         
-        tr:hover {
-            background: rgba(255,255,255,0.02);
-        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
         
-        /* Status Badges */
+        /* Badges */
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px 12px;
+            gap: 6px;
+            padding: 8px 14px;
             border-radius: 30px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
         }
         
         .badge-live {
@@ -300,107 +379,149 @@
         }
         
         .action-btn {
-            padding: 8px 14px;
+            padding: 10px 16px;
             font-size: 0.8rem;
-            border-radius: 8px;
+            border-radius: 10px;
             width: auto;
             white-space: nowrap;
         }
         
-        /* Status Message */
+        /* Settings Grid */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .settings-section {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .settings-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+        
+        /* Color Picker */
+        .color-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        input[type="color"] {
+            width: 60px;
+            height: 50px;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .color-input-wrapper input[type="text"] {
+            flex: 1;
+        }
+        
+        /* Status Bar */
         .status-bar {
             position: fixed;
-            bottom: 20px;
+            bottom: 25px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(100px);
             background: var(--success);
             color: white;
-            padding: 15px 30px;
+            padding: 16px 35px;
             border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-weight: 700;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             z-index: 1000;
-            display: none;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
         .status-bar.show {
-            display: block;
-            animation: slideUp 0.5s ease;
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            transform: translateX(-50%) translateY(0);
         }
         
         /* Modal */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
         
-        .modal.show {
-            display: flex;
-        }
+        .modal.show { display: flex; }
         
         .modal-content {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 35px;
+            border-radius: 24px;
+            padding: 40px;
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .modal-content h2 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .modal-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 25px;
         }
         
-        /* Help Panel */
-        .help-panel {
-            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
-            border: 1px solid var(--primary);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
+        .modal-actions button { flex: 1; }
+        
+        /* Alert Box */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
-        .help-panel h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
+        .alert-warning {
+            background: rgba(245,158,11,0.15);
+            border: 1px solid var(--warning);
+            color: var(--warning);
         }
         
-        .help-panel ul {
-            margin-left: 20px;
-            color: var(--text-muted);
-        }
-        
-        .help-panel li {
-            margin-bottom: 8px;
+        .alert-success {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid var(--success);
+            color: var(--success);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .header { flex-direction: column; gap: 15px; text-align: center; }
-            .header-actions { width: 100%; justify-content: center; }
+            .header { flex-direction: column; gap: 20px; text-align: center; }
+            .header-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .tabs { flex-wrap: wrap; }
+            .tab { flex: 1 1 45%; }
             .upload-grid { grid-template-columns: 1fr; }
+            .settings-grid { grid-template-columns: 1fr; }
+            th, td { padding: 14px 10px; font-size: 0.85rem; }
             .action-btns { justify-content: center; }
-            th, td { padding: 12px 8px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -409,14 +530,23 @@
     <!-- LOGIN SCREEN -->
     <div id="login-screen" class="login-container">
         <div class="login-box">
-            <h1>🔐 Admin Portal</h1>
-            <p>Welcome back, Riyaaz Sir! Enter your GitHub Token to continue.</p>
-            <div>
-                <label>GitHub Token</label>
-                <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx...">
+            <div class="login-icon">🔐</div>
+            <h1>Admin Portal</h1>
+            <p>Enter your credentials to access the dashboard.</p>
+            
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="login-username" placeholder="Enter your username">
             </div>
+            
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+            </div>
+            
             <button onclick="login()">🚀 Access Dashboard</button>
-            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">Your token is stored securely in your browser only.</p>
+            
+            <a href="index.html" class="back-link">← Back to Student Portal</a>
         </div>
     </div>
     
@@ -426,96 +556,180 @@
             
             <!-- Header -->
             <div class="header">
-                <div>
-                    <h1>👨‍🏫 Riyaaz Sir's Dashboard</h1>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Manage your learning portal</p>
+                <div class="header-left">
+                    <h1>👨‍🏫 <span id="admin-welcome">Admin Dashboard</span></h1>
+                    <p>Manage your learning portal with ease.</p>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-sm btn-outline" onclick="window.open('index.html', '_blank')">👁️ View Site</button>
-                    <button class="btn-sm btn-outline" onclick="toggleHelp()">❓ Help</button>
-                    <button class="btn-sm btn-danger" onclick="logout()">🚪 Logout</button>
+                    <button class="btn btn-outline" onclick="window.open('index.html', '_blank')">👁️ View Site</button>
+                    <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
                 </div>
             </div>
             
-            <!-- Help Panel (Hidden by default) -->
-            <div class="help-panel" id="help-panel" style="display: none;">
-                <h3>📖 Quick Guide for Riyaaz Sir</h3>
-                <ul>
-                    <li><strong>Upload:</strong> Fill in details and click "Publish" to add new papers</li>
-                    <li><strong>Edit:</strong> Change paper name, subject, or description anytime</li>
-                    <li><strong>Replace PDF:</strong> Upload a corrected PDF without changing the listing</li>
-                    <li><strong>Hide/Show:</strong> Temporarily hide papers before/after exams</li>
-                    <li><strong>Delete:</strong> Permanently remove papers from the website</li>
-                    <li><strong>Tip:</strong> Use consistent subject names (Physics, Chemistry, Maths)</li>
-                </ul>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('papers', this)">📄 Papers</button>
+                <button class="tab" onclick="switchTab('upload', this)">📤 Upload</button>
+                <button class="tab" onclick="switchTab('settings', this)">⚙️ Settings</button>
             </div>
             
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="icon">📚</div>
-                    <div class="number" id="stat-total">0</div>
-                    <div class="label">Total Papers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="icon">🟢</div>
-                    <div class="number" id="stat-live">0</div>
-                    <div class="label">Live Papers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="icon">🔴</div>
-                    <div class="number" id="stat-hidden">0</div>
-                    <div class="label">Hidden Papers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="icon">📁</div>
-                    <div class="number" id="stat-subjects">0</div>
-                    <div class="label">Subjects</div>
-                </div>
-            </div>
-            
-            <!-- Upload Section -->
-            <div class="card">
-                <h2>📤 Upload New Paper</h2>
-                <div class="upload-grid">
-                    <div>
-                        <label>Paper Name *</label>
-                        <input type="text" id="new-name" placeholder="e.g. Class 10 Physics Boards 2024">
+            <!-- PAPERS TAB -->
+            <div id="tab-papers" class="tab-content active">
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon">📚</div>
+                        <div class="number" id="stat-total">0</div>
+                        <div class="label">Total Papers</div>
                     </div>
-                    <div>
-                        <label>Subject *</label>
-                        <input type="text" id="new-subject" placeholder="e.g. Physics">
+                    <div class="stat-card">
+                        <div class="icon">🟢</div>
+                        <div class="number" id="stat-live">0</div>
+                        <div class="label">Live</div>
                     </div>
-                    <div>
-                        <label>PDF File *</label>
-                        <input type="file" id="new-file" accept=".pdf">
+                    <div class="stat-card">
+                        <div class="icon">🔴</div>
+                        <div class="number" id="stat-hidden">0</div>
+                        <div class="label">Hidden</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">📁</div>
+                        <div class="number" id="stat-subjects">0</div>
+                        <div class="label">Subjects</div>
                     </div>
                 </div>
-                <div style="margin-top: 15px;">
-                    <label>Description (Optional)</label>
-                    <textarea id="new-desc" rows="2" placeholder="Add a short description for students..."></textarea>
+                
+                <!-- Papers Table -->
+                <div class="card">
+                    <h2>🛠️ Manage Papers</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Subject</th>
+                                    <th>Paper Name</th>
+                                    <th>Uploaded</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paper-list">
+                                <tr><td colspan="5" style="text-align:center; padding:50px;">Loading papers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <button id="upload-btn" onclick="uploadNewPaper()" style="margin-top: 10px;">🚀 Publish to Website</button>
             </div>
             
-            <!-- Manage Section -->
-            <div class="card">
-                <h2>🛠️ Manage Papers</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Subject</th>
-                                <th>Paper Name</th>
-                                <th>Uploaded</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="paper-list">
-                            <tr><td colspan="5" style="text-align: center; padding: 40px;">Loading papers...</td></tr>
-                        </tbody>
-                    </table>
+            <!-- UPLOAD TAB -->
+            <div id="tab-upload" class="tab-content">
+                <div class="card">
+                    <h2>📤 Upload New Paper</h2>
+                    
+                    <div class="alert alert-warning" id="token-warning">
+                        ⚠️ You must enter your GitHub Token in Settings before uploading!
+                    </div>
+                    
+                    <div class="upload-grid">
+                        <div class="form-group">
+                            <label>Paper Name *</label>
+                            <input type="text" id="new-name" placeholder="e.g. Class 10 Physics Boards 2024">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject *</label>
+                            <input type="text" id="new-subject" placeholder="e.g. Physics">
+                        </div>
+                        <div class="form-group">
+                            <label>PDF File *</label>
+                            <input type="file" id="new-file" accept=".pdf">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Description (Optional)</label>
+                        <textarea id="new-desc" rows="3" placeholder="Add a short description for students..."></textarea>
+                    </div>
+                    <button id="upload-btn" onclick="uploadNewPaper()" style="margin-top: 15px;">🚀 Publish to Website</button>
+                </div>
+            </div>
+            
+            <!-- SETTINGS TAB -->
+            <div id="tab-settings" class="tab-content">
+                <div class="settings-grid">
+                    
+                    <!-- GitHub Settings -->
+                    <div class="settings-section">
+                        <h3>🔑 GitHub Connection</h3>
+                        <div class="form-group">
+                            <label>GitHub Username</label>
+                            <input type="text" id="set-gh-username" placeholder="e.g. rajaprogrammer">
+                        </div>
+                        <div class="form-group">
+                            <label>Repository Name</label>
+                            <input type="text" id="set-repo-name" placeholder="e.g. sample-papers">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub Token (Required for uploads)</label>
+                            <input type="password" id="set-gh-token" placeholder="ghp_xxxxxxxxxxxx...">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveGitHubSettings()">💾 Save GitHub Settings</button>
+                    </div>
+                    
+                    <!-- Admin Credentials -->
+                    <div class="settings-section">
+                        <h3>🔐 Admin Credentials</h3>
+                        <div class="form-group">
+                            <label>Admin Username</label>
+                            <input type="text" id="set-admin-user" placeholder="Enter new username">
+                        </div>
+                        <div class="form-group">
+                            <label>Admin Password</label>
+                            <input type="password" id="set-admin-pass" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="set-admin-pass-confirm" placeholder="Confirm new password">
+                        </div>
+                        <button class="btn btn-warning" onclick="saveAdminCredentials()">🔒 Update Credentials</button>
+                    </div>
+                    
+                    <!-- Site Customization -->
+                    <div class="settings-section">
+                        <h3>🎨 Site Customization</h3>
+                        <div class="form-group">
+                            <label>Site Name</label>
+                            <input type="text" id="set-site-name" placeholder="e.g. Riyaaz Sir's Portal">
+                        </div>
+                        <div class="form-group">
+                            <label>Site Tagline</label>
+                            <input type="text" id="set-site-tagline" placeholder="e.g. Your gateway to excellence!">
+                        </div>
+                        <div class="form-group">
+                            <label>Footer Text</label>
+                            <input type="text" id="set-footer" placeholder="e.g. Made with ❤️ for Students">
+                        </div>
+                        <button class="btn btn-success" onclick="saveSiteSettings()">✨ Update Site</button>
+                    </div>
+                    
+                    <!-- Theme Colors -->
+                    <div class="settings-section">
+                        <h3>🌈 Theme Colors</h3>
+                        <div class="form-group">
+                            <label>Primary Color</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="set-primary-color" value="#6366f1" onchange="document.getElementById('set-primary-text').value = this.value">
+                                <input type="text" id="set-primary-text" value="#6366f1" placeholder="#6366f1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Secondary Color</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="set-secondary-color" value="#ec4899" onchange="document.getElementById('set-secondary-text').value = this.value">
+                                <input type="text" id="set-secondary-text" value="#ec4899" placeholder="#ec4899">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="saveThemeColors()">🎨 Update Colors</button>
+                    </div>
+                    
                 </div>
             </div>
             
@@ -525,17 +739,17 @@
     <!-- Edit Modal -->
     <div class="modal" id="edit-modal">
         <div class="modal-content">
-            <h2>✏️ Edit Paper Details</h2>
+            <h2>✏️ Edit Paper</h2>
             <input type="hidden" id="edit-id">
-            <div>
+            <div class="form-group">
                 <label>Paper Name</label>
                 <input type="text" id="edit-name">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Subject</label>
                 <input type="text" id="edit-subject">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Description</label>
                 <textarea id="edit-desc" rows="3"></textarea>
             </div>
@@ -549,10 +763,10 @@
     <!-- Replace Modal -->
     <div class="modal" id="replace-modal">
         <div class="modal-content">
-            <h2>🔄 Replace PDF File</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a new PDF to replace the existing file. Students will automatically get the new version.</p>
+            <h2>🔄 Replace PDF</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px;">Upload a new PDF to replace the existing file. Students will automatically get the new version.</p>
             <input type="hidden" id="replace-id">
-            <div>
+            <div class="form-group">
                 <label>Select New PDF</label>
                 <input type="file" id="replace-file" accept=".pdf">
             </div>
@@ -568,39 +782,126 @@
     
     <script>
         // ==========================================
-        // CONFIGURATION
+        // STATE
         // ==========================================
-        const REPO = 'rajaprogrammer/sample-papers';
-        // ==========================================
-        
-        let token = localStorage.getItem('riyaaz_token');
-        let dbSha = '';
+        let siteConfig = {};
         let papersDb = [];
+        let dbSha = '';
+        let configSha = '';
+        let ghToken = '';
         
         const b64Encode = str => btoa(unescape(encodeURIComponent(str)));
         const b64Decode = str => decodeURIComponent(escape(atob(str)));
         
-        // Initialize
-        if (token) showDashboard();
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        async function init() {
+            // Load config
+            try {
+                const res = await fetch('config.json?t=' + Date.now());
+                siteConfig = await res.json();
+            } catch (e) {
+                siteConfig = {
+                    adminUsername: 'riyaazsir',
+                    adminPassword: 'admin123',
+                    siteName: "Riyaaz Sir's Portal",
+                    siteTagline: 'Your gateway to academic excellence!',
+                    githubUsername: 'rajaprogrammer',
+                    repoName: 'sample-papers',
+                    footerText: "Made with ❤️ for Students",
+                    primaryColor: '#6366f1',
+                    secondaryColor: '#ec4899'
+                };
+            }
+            
+            // Check if logged in
+            const savedSession = localStorage.getItem('admin_session');
+            if (savedSession === 'active') {
+                ghToken = localStorage.getItem('gh_token') || '';
+                showDashboard();
+            }
+        }
         
+        init();
+        
+        // ==========================================
+        // AUTH
+        // ==========================================
         function login() {
-            token = document.getElementById('gh-token').value.trim();
-            if (!token) return alert("Please enter your token!");
-            localStorage.setItem('riyaaz_token', token);
-            showDashboard();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            if (!username || !password) {
+                return alert('Please enter both username and password!');
+            }
+            
+            if (username === siteConfig.adminUsername && password === siteConfig.adminPassword) {
+                localStorage.setItem('admin_session', 'active');
+                ghToken = localStorage.getItem('gh_token') || '';
+                showDashboard();
+            } else {
+                alert('❌ Invalid username or password!');
+            }
         }
         
         function logout() {
-            localStorage.removeItem('riyaaz_token');
+            localStorage.removeItem('admin_session');
             location.reload();
         }
         
         async function showDashboard() {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
-            await fetchDatabase();
+            
+            document.getElementById('admin-welcome').textContent = `Welcome, ${siteConfig.adminUsername}!`;
+            
+            // Load settings into form
+            loadSettingsForm();
+            
+            // Check token warning
+            updateTokenWarning();
+            
+            // Load papers
+            await fetchPapers();
         }
         
+        function loadSettingsForm() {
+            document.getElementById('set-gh-username').value = siteConfig.githubUsername || '';
+            document.getElementById('set-repo-name').value = siteConfig.repoName || '';
+            document.getElementById('set-gh-token').value = ghToken;
+            document.getElementById('set-admin-user').value = siteConfig.adminUsername || '';
+            document.getElementById('set-site-name').value = siteConfig.siteName || '';
+            document.getElementById('set-site-tagline').value = siteConfig.siteTagline || '';
+            document.getElementById('set-footer').value = siteConfig.footerText || '';
+            document.getElementById('set-primary-color').value = siteConfig.primaryColor || '#6366f1';
+            document.getElementById('set-primary-text').value = siteConfig.primaryColor || '#6366f1';
+            document.getElementById('set-secondary-color').value = siteConfig.secondaryColor || '#ec4899';
+            document.getElementById('set-secondary-text').value = siteConfig.secondaryColor || '#ec4899';
+        }
+        
+        function updateTokenWarning() {
+            const warning = document.getElementById('token-warning');
+            if (ghToken) {
+                warning.style.display = 'none';
+            } else {
+                warning.style.display = 'flex';
+            }
+        }
+        
+        // ==========================================
+        // TABS
+        // ==========================================
+        function switchTab(tabName, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+        
+        // ==========================================
+        // STATUS
+        // ==========================================
         function showStatus(msg) {
             const bar = document.getElementById('status-bar');
             bar.textContent = msg;
@@ -608,18 +909,22 @@
             setTimeout(() => bar.classList.remove('show'), 4000);
         }
         
-        function toggleHelp() {
-            const panel = document.getElementById('help-panel');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-        }
-        
         // ==========================================
         // GITHUB API
         // ==========================================
-        async function fetchDatabase() {
+        function getRepo() {
+            return `${siteConfig.githubUsername}/${siteConfig.repoName}`;
+        }
+        
+        async function fetchPapers() {
+            if (!ghToken) {
+                renderPapers();
+                return;
+            }
+            
             try {
-                const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
-                    headers: { 'Authorization': `token ${token}` }
+                const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers.json`, {
+                    headers: { 'Authorization': `token ${ghToken}` }
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -628,29 +933,94 @@
                 } else {
                     papersDb = [];
                 }
-                updateStats();
-                renderPapers();
             } catch (e) {
-                alert("Error loading database. Check your token.");
-                logout();
+                papersDb = [];
+            }
+            
+            updateStats();
+            renderPapers();
+        }
+        
+        async function fetchConfig() {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/config.json`, {
+                    headers: { 'Authorization': `token ${ghToken}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    configSha = data.sha;
+                    return JSON.parse(b64Decode(data.content));
+                }
+            } catch (e) {}
+            return null;
+        }
+        
+        async function savePapersToGitHub() {
+            if (!ghToken) {
+                alert('Please enter your GitHub Token in Settings first!');
+                return false;
+            }
+            
+            try {
+                const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers.json`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${ghToken}` },
+                    body: JSON.stringify({
+                        message: 'Update papers database',
+                        content: b64Encode(JSON.stringify(papersDb)),
+                        sha: dbSha || undefined
+                    })
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    dbSha = data.content.sha;
+                    updateStats();
+                    renderPapers();
+                    showStatus('✅ Changes saved! Website updates in ~60 seconds.');
+                    return true;
+                } else {
+                    throw new Error('Save failed');
+                }
+            } catch (e) {
+                alert('Error saving: ' + e.message);
+                return false;
             }
         }
         
-        async function saveDatabase() {
-            const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
-                method: 'PUT',
-                headers: { 'Authorization': `token ${token}` },
-                body: JSON.stringify({
-                    message: "Update papers database",
-                    content: b64Encode(JSON.stringify(papersDb)),
-                    sha: dbSha || undefined
-                })
-            });
-            const data = await res.json();
-            dbSha = data.content.sha;
-            updateStats();
-            renderPapers();
-            showStatus("✅ Changes saved! Website updates in ~60 seconds.");
+        async function saveConfigToGitHub(newConfig) {
+            if (!ghToken) {
+                alert('Please enter your GitHub Token first!');
+                return false;
+            }
+            
+            // Fetch current SHA
+            await fetchConfig();
+            
+            try {
+                const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/config.json`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${ghToken}` },
+                    body: JSON.stringify({
+                        message: 'Update site configuration',
+                        content: b64Encode(JSON.stringify(newConfig)),
+                        sha: configSha || undefined
+                    })
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    configSha = data.content.sha;
+                    siteConfig = newConfig;
+                    showStatus('✅ Settings saved! Website updates in ~60 seconds.');
+                    return true;
+                } else {
+                    throw new Error('Save failed');
+                }
+            } catch (e) {
+                alert('Error saving config: ' + e.message);
+                return false;
+            }
         }
         
         async function uploadFileToGit(file, fileName) {
@@ -658,13 +1028,17 @@
                 const reader = new FileReader();
                 reader.onload = async (e) => {
                     const b64 = e.target.result.split(',')[1];
-                    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers/${fileName}`, {
-                        method: 'PUT',
-                        headers: { 'Authorization': `token ${token}` },
-                        body: JSON.stringify({ message: `Upload ${fileName}`, content: b64 })
-                    });
-                    if (res.ok) resolve(`papers/${fileName}`);
-                    else reject("Upload failed");
+                    try {
+                        const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers/${fileName}`, {
+                            method: 'PUT',
+                            headers: { 'Authorization': `token ${ghToken}` },
+                            body: JSON.stringify({ message: `Upload ${fileName}`, content: b64 })
+                        });
+                        if (res.ok) resolve(`papers/${fileName}`);
+                        else reject('Upload failed');
+                    } catch (err) {
+                        reject(err);
+                    }
                 };
                 reader.readAsDataURL(file);
             });
@@ -689,7 +1063,11 @@
             const list = document.getElementById('paper-list');
             
             if (papersDb.length === 0) {
-                list.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-muted);">No papers uploaded yet. Start by uploading your first paper above!</td></tr>`;
+                list.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:60px; color: var(--text-muted);">No papers uploaded yet. Go to Upload tab to add your first paper!</td></tr                  function renderPapers() {
+            const list = document.getElementById('paper-list');
+            
+            if (papersDb.length === 0) {
+                list.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:60px; color: var(--text-muted);">No papers uploaded yet. Go to Upload tab to add your first paper!</td></tr>`;
                 return;
             }
             
@@ -707,7 +1085,7 @@
                         <td><strong style="color: var(--primary);">${p.subject}</strong></td>
                         <td>
                             <strong>${p.name}</strong>
-                            ${p.description ? `<br><small style="color: var(--text-muted);">${p.description.substring(0, 50)}...</small>` : ''}
+                            ${p.description ? `<br><small style="color: var(--text-muted);">${p.description.substring(0, 50)}${p.description.length > 50 ? '...' : ''}</small>` : ''}
                         </td>
                         <td style="color: var(--text-muted);">${date}</td>
                         <td>
@@ -724,7 +1102,7 @@
         }
         
         // ==========================================
-        // ACTIONS
+        // PAPER ACTIONS
         // ==========================================
         async function uploadNewPaper() {
             const name = document.getElementById('new-name').value.trim();
@@ -734,11 +1112,15 @@
             const btn = document.getElementById('upload-btn');
             
             if (!name || !subject || !fileInput.files.length) {
-                return alert("Please fill in all required fields!");
+                return alert('Please fill in all required fields!');
+            }
+            
+            if (!ghToken) {
+                return alert('Please enter your GitHub Token in Settings first!');
             }
             
             btn.disabled = true;
-            btn.textContent = "⏳ Uploading...";
+            btn.innerHTML = '⏳ Uploading...';
             
             try {
                 const file = fileInput.files[0];
@@ -754,7 +1136,7 @@
                     visible: true
                 });
                 
-                await saveDatabase();
+                await savePapersToGitHub();
                 
                 // Clear form
                 document.getElementById('new-name').value = '';
@@ -762,24 +1144,29 @@
                 document.getElementById('new-desc').value = '';
                 fileInput.value = '';
                 
+                showStatus('✅ Paper uploaded successfully!');
+                
             } catch (e) {
-                alert("Upload failed: " + e);
+                alert('Upload failed: ' + e);
             }
             
             btn.disabled = false;
-            btn.textContent = "🚀 Publish to Website";
+            btn.innerHTML = '🚀 Publish to Website';
         }
         
         async function toggleVisibility(id) {
             const paper = papersDb.find(p => p.id === id);
-            paper.visible = paper.visible === false ? true : false;
-            await saveDatabase();
+            if (paper) {
+                paper.visible = paper.visible === false ? true : false;
+                await savePapersToGitHub();
+            }
         }
         
         async function deletePaper(id) {
-            if (!confirm("⚠️ Are you sure you want to permanently delete this paper?")) return;
+            if (!confirm('⚠️ Are you sure you want to permanently delete this paper?')) return;
+            
             papersDb = papersDb.filter(p => p.id !== id);
-            await saveDatabase();
+            await savePapersToGitHub();
         }
         
         // ==========================================
@@ -787,10 +1174,13 @@
         // ==========================================
         function openEditModal(id) {
             const paper = papersDb.find(p => p.id === id);
+            if (!paper) return;
+            
             document.getElementById('edit-id').value = id;
             document.getElementById('edit-name').value = paper.name;
             document.getElementById('edit-subject').value = paper.subject;
             document.getElementById('edit-desc').value = paper.description || '';
+            
             document.getElementById('edit-modal').classList.add('show');
         }
         
@@ -798,12 +1188,14 @@
             const id = parseInt(document.getElementById('edit-id').value);
             const paper = papersDb.find(p => p.id === id);
             
-            paper.name = document.getElementById('edit-name').value.trim();
-            paper.subject = document.getElementById('edit-subject').value.trim();
-            paper.description = document.getElementById('edit-desc').value.trim();
-            
-            closeModal('edit-modal');
-            await saveDatabase();
+            if (paper) {
+                paper.name = document.getElementById('edit-name').value.trim();
+                paper.subject = document.getElementById('edit-subject').value.trim();
+                paper.description = document.getElementById('edit-desc').value.trim();
+                
+                await savePapersToGitHub();
+                closeModal('edit-modal');
+            }
         }
         
         // ==========================================
@@ -820,35 +1212,40 @@
             const fileInput = document.getElementById('replace-file');
             const btn = document.getElementById('replace-btn');
             
-            if (!fileInput.files.length) return alert("Please select a PDF file!");
+            if (!fileInput.files.length) {
+                return alert('Please select a PDF file!');
+            }
             
             btn.disabled = true;
-            btn.textContent = "⏳ Uploading...";
+            btn.innerHTML = '⏳ Uploading...';
             
             try {
                 const file = fileInput.files[0];
-                const fileName = 'r' + Date.now() + '.pdf';
+                const fileName = 'replaced_' + Date.now() + '.pdf';
                 const newLink = await uploadFileToGit(file, fileName);
                 
                 const paper = papersDb.find(p => p.id === id);
-                paper.link = newLink;
+                if (paper) {
+                    paper.link = newLink;
+                    await savePapersToGitHub();
+                }
                 
                 closeModal('replace-modal');
-                await saveDatabase();
+                showStatus('✅ PDF replaced successfully!');
                 
             } catch (e) {
-                alert("Replace failed: " + e);
+                alert('Replace failed: ' + e);
             }
             
             btn.disabled = false;
-            btn.textContent = "📤 Upload New PDF";
+            btn.innerHTML = '📤 Upload New PDF';
         }
         
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('show');
         }
         
-        // Close modal on outside click
+        // Close modals on outside click
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -856,6 +1253,88 @@
                 }
             });
         });
+        
+        // ==========================================
+        // SETTINGS FUNCTIONS
+        // ==========================================
+        function saveGitHubSettings() {
+            const username = document.getElementById('set-gh-username').value.trim();
+            const repo = document.getElementById('set-repo-name').value.trim();
+            const token = document.getElementById('set-gh-token').value.trim();
+            
+            if (!username || !repo) {
+                return alert('Please enter GitHub username and repository name!');
+            }
+            
+            // Save token locally (not to GitHub for security)
+            if (token) {
+                localStorage.setItem('gh_token', token);
+                ghToken = token;
+            }
+            
+            // Update config
+            siteConfig.githubUsername = username;
+            siteConfig.repoName = repo;
+            
+            // Save to GitHub
+            saveConfigToGitHub(siteConfig);
+            updateTokenWarning();
+        }
+        
+        async function saveAdminCredentials() {
+            const newUsername = document.getElementById('set-admin-user').value.trim();
+            const newPassword = document.getElementById('set-admin-pass').value;
+            const confirmPassword = document.getElementById('set-admin-pass-confirm').value;
+            
+            if (!newUsername) {
+                return alert('Please enter a username!');
+            }
+            
+            if (newPassword && newPassword !== confirmPassword) {
+                return alert('Passwords do not match!');
+            }
+            
+            if (newPassword && newPassword.length < 4) {
+                return alert('Password must be at least 4 characters!');
+            }
+            
+            // Update config
+            siteConfig.adminUsername = newUsername;
+            if (newPassword) {
+                siteConfig.adminPassword = newPassword;
+            }
+            
+            const saved = await saveConfigToGitHub(siteConfig);
+            
+            if (saved) {
+                document.getElementById('admin-welcome').textContent = `Welcome, ${newUsername}!`;
+                document.getElementById('set-admin-pass').value = '';
+                document.getElementById('set-admin-pass-confirm').value = '';
+                showStatus('✅ Credentials updated! Use new credentials next login.');
+            }
+        }
+        
+        async function saveSiteSettings() {
+            const siteName = document.getElementById('set-site-name').value.trim();
+            const tagline = document.getElementById('set-site-tagline').value.trim();
+            const footer = document.getElementById('set-footer').value.trim();
+            
+            if (siteName) siteConfig.siteName = siteName;
+            if (tagline) siteConfig.siteTagline = tagline;
+            if (footer) siteConfig.footerText = footer;
+            
+            await saveConfigToGitHub(siteConfig);
+        }
+        
+        async function saveThemeColors() {
+            const primary = document.getElementById('set-primary-text').value.trim() || document.getElementById('set-primary-color').value;
+            const secondary = document.getElementById('set-secondary-text').value.trim() || document.getElementById('set-secondary-color').value;
+            
+            siteConfig.primaryColor = primary;
+            siteConfig.secondaryColor = secondary;
+            
+            await saveConfigToGitHub(siteConfig);
+        }
     </script>
 </body>
 </html>
