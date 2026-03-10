@@ -8,27 +8,21 @@
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
             --secondary: #ec4899;
             --bg: #f8fafc;
-            --bg-card: rgba(255,255,255,0.85);
+            --bg-card: rgba(255,255,255,0.9);
             --text: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
         }
-        
         [data-theme="dark"] {
             --bg: #0f172a;
-            --bg-card: rgba(30,41,59,0.85);
+            --bg-card: rgba(30,41,59,0.9);
             --text: #f1f5f9;
             --text-muted: #94a3b8;
             --border: #334155;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg);
@@ -36,42 +30,11 @@
             min-height: 100vh;
             transition: all 0.3s;
         }
-        
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background: var(--bg);
-        }
-        
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(236,72,153,0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
-            animation: bgFloat 25s infinite linear;
-        }
-        
-        @keyframes bgFloat {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(120deg); }
-            66% { transform: translate(-1%, 3%) rotate(240deg); }
-        }
-        
-        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
             top: 20px; right: 20px;
             z-index: 1000;
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
             width: 50px; height: 50px;
             border-radius: 50%;
@@ -79,472 +42,195 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1) rotate(20deg);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        /* Hero Section */
+        .theme-toggle:hover { transform: scale(1.1); }
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 80px 20px 130px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 20px 120px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        
         .hero::after {
             content: '';
             position: absolute;
             bottom: -2px; left: 0;
-            width: 100%; height: 80px;
+            width: 100%; height: 60px;
             background: var(--bg);
             clip-path: ellipse(55% 100% at 50% 100%);
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
+            font-size: clamp(2rem, 5vw, 3rem);
             color: white;
             margin-bottom: 10px;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
         }
-        
-        .hero p {
-            font-size: 1.15rem;
-            color: rgba(255,255,255,0.9);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
+        .hero p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 50px;
-            margin-top: 35px;
+            margin-top: 30px;
         }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.8);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-        
-        /* Container */
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: white; }
+        .stat-label { color: rgba(255,255,255,0.8); font-size: 0.85rem; text-transform: uppercase; }
         .container {
             max-width: 1200px;
-            margin: -60px auto 40px;
+            margin: -50px auto 40px;
             padding: 0 20px;
             position: relative;
             z-index: 10;
         }
-        
-        /* Search Section */
         .search-section {
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        
-        .search-wrapper {
-            position: relative;
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 22px; top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-        
         .search-bar {
             width: 100%;
-            padding: 18px 20px 18px 55px;
+            padding: 15px 20px;
             border: 2px solid var(--border);
-            border-radius: 16px;
+            border-radius: 12px;
             font-size: 1rem;
-            font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
-            transition: all 0.3s;
-        }
-        
-        .search-bar:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
+            transition: border-color 0.3s;
         }
-        
-        .search-bar::placeholder { color: var(--text-muted); }
-        
-        /* Filter Tags */
+        .search-bar:focus { border-color: var(--primary); }
         .filter-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
-        
         .filter-tag {
-            padding: 10px 18px;
+            padding: 8px 16px;
             background: var(--bg);
             border: 2px solid var(--border);
-            border-radius: 30px;
-            font-size: 0.85rem;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s;
-            font-weight: 600;
         }
-        
-        .filter-tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
+        .filter-tag:hover { border-color: var(--primary); color: var(--primary); }
         .filter-tag.active {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-color: transparent;
         }
-        
-        /* Section Title */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .paper-count {
-            background: var(--bg-card);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-        }
-        
-        /* Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
         }
-        
-        /* Cards */
         .card {
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s;
-        }
-        
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             border-color: var(--primary);
         }
-        
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
         .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.15));
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
             color: var(--primary);
-            border-radius: 30px;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-        
         .new-badge {
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 5px 10px;
+            border-radius: 15px;
             font-size: 0.7rem;
             font-weight: 700;
-            animation: pulse 2s infinite;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
-        
-        .title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text);
-            line-height: 1.4;
-        }
-        
-        .description {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-        
-        .meta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
+        .title { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .description { color: var(--text-muted); font-size: 0.9rem; flex-grow: 1; margin-bottom: 15px; }
+        .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 15px; }
         .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 16px 24px;
+            padding: 14px;
+            border-radius: 12px;
             text-decoration: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(99,102,241,0.4);
-        }
-        
-        .download-btn:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 25px rgba(99,102,241,0.5);
-        }
-        
-        /* Empty State */
-        .empty-state {
             text-align: center;
-            padding: 80px 20px;
-            grid-column: 1 / -1;
+            font-weight: 700;
+            transition: all 0.3s;
         }
-        
-        .empty-state-icon {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-        
-        .empty-state h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-        
-        .empty-state p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-        
-        /* Footer */
+        .download-btn:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(99,102,241,0.4); }
+        .empty-state { text-align: center; padding: 60px; grid-column: 1/-1; }
+        .empty-state-icon { font-size: 4rem; margin-bottom: 15px; }
         .footer {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px;
             color: var(--text-muted);
-            font-size: 0.95rem;
             border-top: 1px solid var(--border);
-            margin-top: 80px;
+            margin-top: 60px;
         }
-        
-        .footer-links {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-        }
-        
-        .footer-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .footer-link:hover {
-            color: var(--secondary);
-        }
-        
-        /* Loading */
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px;
-            grid-column: 1 / -1;
-            gap: 20px;
-        }
-        
+        .footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .footer a:hover { color: var(--secondary); }
+        .loading { text-align: center; padding: 60px; grid-column: 1/-1; }
         .spinner {
-            width: 50px; height: 50px;
+            width: 40px; height: 40px;
             border: 4px solid var(--border);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
         }
-        
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero { padding: 60px 20px 110px; }
             .hero-stats { gap: 30px; }
             .stat-number { font-size: 2rem; }
             .grid { grid-template-columns: 1fr; }
-            .container { margin-top: -50px; }
-            .section-header { flex-direction: column; gap: 15px; align-items: flex-start; }
-            .footer-links { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+    <button class="theme-toggle" onclick="toggleTheme()">
         <span id="theme-icon">🌙</span>
     </button>
     
     <div class="hero">
-        <div class="hero-content">
-            <div class="hero-icon">👨‍🏫</div>
-            <h1 id="site-name">Study Portal</h1>
-            <p id="site-tagline">Your gateway to academic excellence!</p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number" id="total-papers">0</div>
-                    <div class="stat-label">Papers</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="total-subjects">0</div>
-                    <div class="stat-label">Subjects</div>
-                </div>
+        <h1 id="site-name">📚 Study Portal</h1>
+        <p id="site-tagline">Your gateway to academic excellence!</p>
+        <div class="hero-stats">
+            <div>
+                <div class="stat-number" id="total-papers">0</div>
+                <div class="stat-label">Papers</div>
+            </div>
+            <div>
+                <div class="stat-number" id="total-subjects">0</div>
+                <div class="stat-label">Subjects</div>
             </div>
         </div>
     </div>
     
     <div class="container">
         <div class="search-section">
-            <div class="search-wrapper">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search" class="search-bar" placeholder="Search papers by name, subject, or description..." onkeyup="filterPapers()">
-            </div>
+            <input type="text" id="search" class="search-bar" placeholder="🔍 Search papers..." onkeyup="filterPapers()">
             <div class="filter-tags" id="filter-tags">
-                <span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>
+                <span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All</span>
             </div>
         </div>
-        
-        <div class="section-header">
-            <h2 class="section-title">📄 Available Papers</h2>
-            <span class="paper-count" id="showing-count">Showing 0 papers</span>
-        </div>
-        
         <div class="grid" id="paper-grid">
             <div class="loading">
                 <div class="spinner"></div>
@@ -555,10 +241,7 @@
     
     <div class="footer">
         <p id="footer-text">Made with ❤️ for Students</p>
-        <p style="margin-top: 8px; font-size: 0.85rem;">© 2024 All rights reserved</p>
-        <div class="footer-links">
-            <a href="admin.html" class="footer-link">🔐 Admin Portal</a>
-        </div>
+        <p style="margin-top: 15px;"><a href="admin.html">🔐 Admin Portal</a></p>
     </div>
     
     <script>
@@ -566,11 +249,10 @@
         let siteConfig = {};
         let currentFilter = 'all';
         
-        // Theme
         function initTheme() {
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', saved);
-            updateThemeIcon(saved);
+            document.getElementById('theme-icon').textContent = saved === 'dark' ? '☀️' : '🌙';
         }
         
         function toggleTheme() {
@@ -578,44 +260,21 @@
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
-            updateThemeIcon(next);
+            document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
         }
         
-        function updateThemeIcon(theme) {
-            document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-        
-        // Load Config
         async function loadConfig() {
             try {
                 const res = await fetch('config.json?t=' + Date.now());
                 siteConfig = await res.json();
-                applyConfig();
-            } catch (e) {
-                console.log("Using default config");
-            }
+                if (siteConfig.siteName) document.getElementById('site-name').textContent = '📚 ' + siteConfig.siteName;
+                if (siteConfig.siteTagline) document.getElementById('site-tagline').textContent = siteConfig.siteTagline;
+                if (siteConfig.footerText) document.getElementById('footer-text').textContent = siteConfig.footerText;
+                if (siteConfig.primaryColor) document.documentElement.style.setProperty('--primary', siteConfig.primaryColor);
+                if (siteConfig.secondaryColor) document.documentElement.style.setProperty('--secondary', siteConfig.secondaryColor);
+            } catch (e) { console.log('Using defaults'); }
         }
         
-        function applyConfig() {
-            if (siteConfig.siteName) {
-                document.getElementById('site-name').textContent = siteConfig.siteName;
-                document.getElementById('page-title').textContent = siteConfig.siteName;
-            }
-            if (siteConfig.siteTagline) {
-                document.getElementById('site-tagline').textContent = siteConfig.siteTagline;
-            }
-            if (siteConfig.footerText) {
-                document.getElementById('footer-text').textContent = siteConfig.footerText;
-            }
-            if (siteConfig.primaryColor) {
-                document.documentElement.style.setProperty('--primary', siteConfig.primaryColor);
-            }
-            if (siteConfig.secondaryColor) {
-                document.documentElement.style.setProperty('--secondary', siteConfig.secondaryColor);
-            }
-        }
-        
-        // Load Papers
         async function loadPapers() {
             try {
                 const res = await fetch('papers.json?t=' + Date.now());
@@ -624,34 +283,22 @@
                 buildFilterTags();
                 renderPapers(allPapers);
             } catch (e) {
-                document.getElementById('paper-grid').innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <h3>Coming Soon!</h3>
-                        <p>Papers are being uploaded. Check back later!</p>
-                    </div>
-                `;
+                document.getElementById('paper-grid').innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><h3>Coming Soon!</h3><p>Papers are being uploaded.</p></div>';
             }
         }
         
         function updateStats() {
             const visible = allPapers.filter(p => p.visible !== false);
-            const subjects = [...new Set(visible.map(p => p.subject))];
             document.getElementById('total-papers').textContent = visible.length;
-            document.getElementById('total-subjects').textContent = subjects.length;
+            document.getElementById('total-subjects').textContent = [...new Set(visible.map(p => p.subject))].length;
         }
         
         function buildFilterTags() {
-            const visible = allPapers.filter(p => p.visible !== false);
-            const subjects = [...new Set(visible.map(p => p.subject))].sort();
+            const subjects = [...new Set(allPapers.filter(p => p.visible !== false).map(p => p.subject))].sort();
             const container = document.getElementById('filter-tags');
-            
-            container.innerHTML = `<span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>`;
-            
-            const icons = ['📐', '🔬', '🧪', '📖', '🌍', '💻', '🎨', '📊', '🧮', '🔢'];
-            subjects.forEach((sub, i) => {
-                const icon = icons[i % icons.length];
-                container.innerHTML += `<span class="filter-tag" onclick="filterBySubject('${sub}', this)">${icon} ${sub}</span>`;
+            container.innerHTML = '<span class="filter-tag active" onclick="filterBySubject(\'all\', this)">📚 All</span>';
+            subjects.forEach(s => {
+                container.innerHTML += '<span class="filter-tag" onclick="filterBySubject(\'' + s + '\', this)">' + s + '</span>';
             });
         }
         
@@ -665,70 +312,24 @@
         function filterPapers() {
             const query = document.getElementById('search').value.toLowerCase();
             let filtered = allPapers.filter(p => p.visible !== false);
-            
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(p => p.subject === currentFilter);
-            }
-            
-            if (query) {
-                filtered = filtered.filter(p => 
-                    p.name.toLowerCase().includes(query) || 
-                    (p.subject && p.subject.toLowerCase().includes(query)) ||
-                    (p.description && p.description.toLowerCase().includes(query))
-                );
-            }
-            
+            if (currentFilter !== 'all') filtered = filtered.filter(p => p.subject === currentFilter);
+            if (query) filtered = filtered.filter(p => p.name.toLowerCase().includes(query) || (p.subject && p.subject.toLowerCase().includes(query)));
             renderPapers(filtered);
-            document.getElementById('showing-count').textContent = `Showing ${filtered.length} paper${filtered.length !== 1 ? 's' : ''}`;
-        }
-        
-        function isNew(timestamp) {
-            const threeDays = 3 * 24 * 60 * 60 * 1000;
-            return Date.now() - timestamp < threeDays;
         }
         
         function renderPapers(papers) {
             const grid = document.getElementById('paper-grid');
-            
             if (papers.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🔍</div>
-                        <h3>No Papers Found</h3>
-                        <p>Try a different search term or filter.</p>
-                    </div>
-                `;
+                grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No Papers Found</h3></div>';
                 return;
             }
-            
-            grid.innerHTML = papers.map(paper => {
-                const date = new Date(paper.id).toLocaleDateString('en-US', { 
-                    year: 'numeric', month: 'short', day: 'numeric' 
-                });
-                
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="tag">📚 ${paper.subject || 'General'}</span>
-                            ${isNew(paper.id) ? '<span class="new-badge">✨ NEW</span>' : ''}
-                        </div>
-                        <h3 class="title">${paper.name}</h3>
-                        <p class="description">${paper.description || 'Download this sample paper to boost your exam preparation!'}</p>
-                        <div class="meta">
-                            <span class="meta-item">📅 ${date}</span>
-                            <span class="meta-item">📄 PDF Document</span>
-                        </div>
-                        <a href="${paper.link}" class="download-btn" download>
-                            📥 Download Now
-                        </a>
-                    </div>
-                `;
+            grid.innerHTML = papers.map(p => {
+                const date = new Date(p.id).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const isNew = Date.now() - p.id < 3 * 24 * 60 * 60 * 1000;
+                return '<div class="card"><div class="card-header"><span class="tag">' + (p.subject || 'General') + '</span>' + (isNew ? '<span class="new-badge">✨ NEW</span>' : '') + '</div><div class="title">' + p.name + '</div><div class="description">' + (p.description || 'Download this paper for your preparation!') + '</div><div class="meta">📅 ' + date + '</div><a href="' + p.link + '" class="download-btn" download>📥 Download</a></div>';
             }).join('');
-            
-            document.getElementById('showing-count').textContent = `Showing ${papers.length} paper${papers.length !== 1 ? 's' : ''}`;
         }
         
-        // Init
         initTheme();
         loadConfig();
         loadPapers();
