@@ -1,4 +1,4 @@
-name: Setup Riyaaz Sir LMS
+name: Setup Riyaaz Sir Premium LMS
 
 on:
   workflow_dispatch:
@@ -23,6 +23,23 @@ jobs:
           JSONEOF
 
           # ============================================
+          # CREATE config.json (Admin Credentials & Settings)
+          # ============================================
+          cat > config.json << 'CONFIGEOF'
+          {
+            "adminUsername": "riyaazsir",
+            "adminPassword": "admin123",
+            "siteName": "Riyaaz Sir's Portal",
+            "siteTagline": "Your gateway to academic excellence!",
+            "githubUsername": "rajaprogrammer",
+            "repoName": "sample-papers",
+            "footerText": "Made with ❤️ for Riyaaz Sir's Students",
+            "primaryColor": "#6366f1",
+            "secondaryColor": "#ec4899"
+          }
+          CONFIGEOF
+
+          # ============================================
           # CREATE README.md (Feature Documentation)
           # ============================================
           cat > README.md << 'READMEEOF'
@@ -32,96 +49,73 @@ jobs:
 
           ---
 
+          ## 🔐 Default Admin Credentials
+
+          | Field | Default Value |
+          |-------|---------------|
+          | **Username** | `riyaazsir` |
+          | **Password** | `admin123` |
+
+          ⚠️ **IMPORTANT:** Change these immediately after first login!
+
+          ---
+
           ## 🌟 Student Portal Features
 
-          | Feature | Description |
-          |---------|-------------|
-          | 🎨 **Beautiful UI** | Modern glassmorphism design with smooth animations |
-          | 🔍 **Smart Search** | Instantly search papers by name or subject |
-          | 🏷️ **Subject Tags** | Color-coded tags for easy identification |
-          | 📅 **Upload Dates** | See when each paper was uploaded |
-          | 📱 **Fully Responsive** | Works perfectly on mobile, tablet, and desktop |
-          | 🌙 **Dark/Light Mode** | Toggle between themes (saved automatically) |
-          | ⚡ **Instant Downloads** | One-click PDF downloads |
-          | 🔢 **Paper Counter** | Shows total available papers |
+          - 🎨 Beautiful glassmorphism UI with animations
+          - 🌙 Dark/Light mode toggle
+          - 🔍 Live search by name or subject
+          - 🏷️ Filter tags by subject
+          - ✨ "NEW" badge for recent papers
+          - 📊 Live paper & subject counter
+          - 📱 Fully responsive design
+          - 🔗 Quick admin access link
 
           ---
 
-          ## 🔐 Admin Dashboard Features
+          ## ⚙️ Admin Dashboard Features
 
-          | Feature | Description |
-          |---------|-------------|
-          | 🔒 **Secure Login** | GitHub Token authentication |
-          | 💾 **Remember Me** | Token saved securely in browser |
-          | 📤 **Easy Upload** | Upload PDFs with name, subject, and description |
-          | ✏️ **Edit Papers** | Change name, subject, or description anytime |
-          | 🔄 **Replace PDF** | Swap out old PDFs without changing the listing |
-          | 👁️ **Hide/Show** | Temporarily hide papers from students |
-          | 🗑️ **Delete Forever** | Permanently remove papers |
-          | 📊 **Stats Dashboard** | See total papers, live count, hidden count |
-          | 🎨 **Dark Theme** | Easy on the eyes for late-night work |
-          | 📋 **Activity Log** | See recent actions |
-
-          ---
-
-          ## 🚀 How to Use
-
-          ### For Students:
-          Simply visit: `https://YOUR-USERNAME.github.io/sample-papers/`
-
-          ### For Admin (Riyaaz Sir):
-          1. Visit: `https://YOUR-USERNAME.github.io/sample-papers/admin.html`
-          2. Enter your GitHub Personal Access Token
-          3. Start uploading and managing papers!
+          - 🔒 Username + Password authentication
+          - 📤 Upload papers with name, subject, description
+          - ✏️ Edit paper details anytime
+          - 🔄 Replace PDF files
+          - 👁️ Hide/Show papers
+          - 🗑️ Delete papers permanently
+          - 📊 Live statistics dashboard
+          - ⚙️ **Settings Panel:**
+            - Change admin username
+            - Change admin password
+            - Change site name & tagline
+            - Change GitHub repo settings
+            - Change theme colors
+            - Change footer text
 
           ---
 
-          ## 🔑 How to Get Your Admin Token
+          ## 🚀 Quick Start
 
-          1. Go to GitHub → Click your Profile Picture → **Settings**
-          2. Scroll down → **Developer Settings** → **Personal Access Tokens** → **Tokens (classic)**
-          3. Click **Generate new token (classic)**
-          4. Name: `LMS Admin Key`
-          5. Expiration: `No expiration`
-          6. Scopes: Check `repo` (full control)
-          7. Click **Generate token**
-          8. **COPY AND SAVE IT SECURELY!**
+          1. Visit: `https://YOUR-USERNAME.github.io/sample-papers/`
+          2. Click "Admin Portal" link at bottom
+          3. Login with default credentials
+          4. **Change your password immediately!**
+          5. Start uploading papers!
 
           ---
 
-          ## 📁 File Structure
+          ## 🔑 Getting Your GitHub Token
 
-          ```
-          sample-papers/
-          ├── index.html      # Student Portal
-          ├── admin.html      # Admin Dashboard
-          ├── papers.json     # Database
-          ├── papers/         # PDF Storage (auto-created)
-          └── README.md       # This file
-          ```
-
-          ---
-
-          ## ⚙️ Configuration
-
-          To change the repository owner, edit `admin.html` line ~180:
-          ```javascript
-          const REPO = 'YOUR-USERNAME/sample-papers';
-          ```
+          1. GitHub → Profile → Settings
+          2. Developer Settings → Personal Access Tokens → Tokens (classic)
+          3. Generate new token (classic)
+          4. Name: `LMS Admin`
+          5. Expiration: No expiration
+          6. Scopes: Check `repo`
+          7. Generate & copy the token
+          8. Enter it in Admin Dashboard settings
 
           ---
 
-          ## 💡 Tips for Riyaaz Sir
-
-          1. **Bookmark the admin page** for quick access
-          2. **Use descriptive names** like "Class 10 - Physics - 2024 Boards"
-          3. **Use consistent subjects** like "Physics", "Chemistry", "Maths"
-          4. **Hide papers** before exams, then reveal them after
-          5. **Replace PDFs** if you find errors - students won't notice!
-
-          ---
-
-          Made with ❤️ for Riyaaz Sir's Students
+          Made with ❤️ for Riyaaz Sir
           READMEEOF
 
           # ============================================
@@ -133,7 +127,7 @@ jobs:
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Riyaaz Sir | Study Portal</title>
+              <title id="page-title">Study Portal</title>
               <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
               <style>
                   :root {
@@ -141,18 +135,17 @@ jobs:
                       --primary-dark: #4f46e5;
                       --secondary: #ec4899;
                       --bg: #f8fafc;
-                      --bg-card: rgba(255,255,255,0.8);
+                      --bg-card: rgba(255,255,255,0.85);
                       --text: #1e293b;
                       --text-muted: #64748b;
                       --border: #e2e8f0;
                       --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
                       --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-                      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
                   }
                   
                   [data-theme="dark"] {
                       --bg: #0f172a;
-                      --bg-card: rgba(30,41,59,0.8);
+                      --bg-card: rgba(30,41,59,0.85);
                       --text: #f1f5f9;
                       --text-muted: #94a3b8;
                       --border: #334155;
@@ -165,58 +158,85 @@ jobs:
                       background: var(--bg);
                       color: var(--text);
                       min-height: 100vh;
-                      transition: background 0.3s, color 0.3s;
+                      transition: all 0.3s;
                   }
                   
                   /* Animated Background */
                   .bg-animation {
                       position: fixed;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 100%;
+                      top: 0; left: 0;
+                      width: 100%; height: 100%;
                       z-index: -1;
                       overflow: hidden;
+                      background: var(--bg);
                   }
                   
                   .bg-animation::before {
                       content: '';
                       position: absolute;
-                      top: -50%;
-                      left: -50%;
-                      width: 200%;
-                      height: 200%;
-                      background: radial-gradient(circle at 20% 50%, rgba(99,102,241,0.1) 0%, transparent 50%),
-                                  radial-gradient(circle at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%),
-                                  radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
-                      animation: float 20s infinite linear;
+                      top: -50%; left: -50%;
+                      width: 200%; height: 200%;
+                      background: 
+                          radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
+                          radial-gradient(circle at 80% 20%, rgba(236,72,153,0.15) 0%, transparent 50%),
+                          radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
+                      animation: bgFloat 25s infinite linear;
                   }
                   
-                  @keyframes float {
+                  @keyframes bgFloat {
                       0%, 100% { transform: translate(0, 0) rotate(0deg); }
-                      25% { transform: translate(2%, 2%) rotate(90deg); }
-                      50% { transform: translate(0, 4%) rotate(180deg); }
-                      75% { transform: translate(-2%, 2%) rotate(270deg); }
+                      33% { transform: translate(2%, 2%) rotate(120deg); }
+                      66% { transform: translate(-1%, 3%) rotate(240deg); }
+                  }
+                  
+                  /* Theme Toggle */
+                  .theme-toggle {
+                      position: fixed;
+                      top: 20px; right: 20px;
+                      z-index: 1000;
+                      background: var(--bg-card);
+                      backdrop-filter: blur(10px);
+                      border: 1px solid var(--border);
+                      width: 50px; height: 50px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.3rem;
+                      box-shadow: var(--shadow);
+                      transition: all 0.3s;
+                  }
+                  
+                  .theme-toggle:hover {
+                      transform: scale(1.1) rotate(20deg);
+                      box-shadow: var(--shadow-lg);
                   }
                   
                   /* Hero Section */
                   .hero {
-                      background: var(--gradient);
-                      padding: 80px 20px 120px;
+                      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+                      padding: 80px 20px 130px;
                       text-align: center;
                       position: relative;
                       overflow: hidden;
                   }
                   
+                  .hero::before {
+                      content: '';
+                      position: absolute;
+                      top: 0; left: 0;
+                      width: 100%; height: 100%;
+                      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                  }
+                  
                   .hero::after {
                       content: '';
                       position: absolute;
-                      bottom: -2px;
-                      left: 0;
-                      width: 100%;
-                      height: 80px;
+                      bottom: -2px; left: 0;
+                      width: 100%; height: 80px;
                       background: var(--bg);
-                      clip-path: ellipse(60% 100% at 50% 100%);
+                      clip-path: ellipse(55% 100% at 50% 100%);
                   }
                   
                   .hero-content {
@@ -224,16 +244,28 @@ jobs:
                       z-index: 2;
                   }
                   
+                  .hero-icon {
+                      font-size: 4rem;
+                      margin-bottom: 15px;
+                      display: inline-block;
+                      animation: bounce 2s infinite;
+                  }
+                  
+                  @keyframes bounce {
+                      0%, 100% { transform: translateY(0); }
+                      50% { transform: translateY(-10px); }
+                  }
+                  
                   .hero h1 {
                       font-size: clamp(2rem, 5vw, 3.5rem);
                       font-weight: 800;
                       color: white;
                       margin-bottom: 10px;
-                      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                      text-shadow: 0 2px 15px rgba(0,0,0,0.2);
                   }
                   
                   .hero p {
-                      font-size: 1.1rem;
+                      font-size: 1.15rem;
                       color: rgba(255,255,255,0.9);
                       max-width: 500px;
                       margin: 0 auto;
@@ -242,8 +274,8 @@ jobs:
                   .hero-stats {
                       display: flex;
                       justify-content: center;
-                      gap: 40px;
-                      margin-top: 30px;
+                      gap: 50px;
+                      margin-top: 35px;
                   }
                   
                   .stat {
@@ -251,45 +283,21 @@ jobs:
                   }
                   
                   .stat-number {
-                      font-size: 2.5rem;
+                      font-size: 2.8rem;
                       font-weight: 800;
                       color: white;
+                      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
                   }
                   
                   .stat-label {
                       font-size: 0.85rem;
                       color: rgba(255,255,255,0.8);
                       text-transform: uppercase;
-                      letter-spacing: 1px;
+                      letter-spacing: 2px;
+                      font-weight: 600;
                   }
                   
-                  /* Theme Toggle */
-                  .theme-toggle {
-                      position: fixed;
-                      top: 20px;
-                      right: 20px;
-                      z-index: 1000;
-                      background: var(--bg-card);
-                      backdrop-filter: blur(10px);
-                      border: 1px solid var(--border);
-                      width: 50px;
-                      height: 50px;
-                      border-radius: 50%;
-                      cursor: pointer;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1.3rem;
-                      box-shadow: var(--shadow);
-                      transition: transform 0.3s, box-shadow 0.3s;
-                  }
-                  
-                  .theme-toggle:hover {
-                      transform: scale(1.1);
-                      box-shadow: var(--shadow-lg);
-                  }
-                  
-                  /* Main Container */
+                  /* Container */
                   .container {
                       max-width: 1200px;
                       margin: -60px auto 40px;
@@ -303,8 +311,8 @@ jobs:
                       background: var(--bg-card);
                       backdrop-filter: blur(20px);
                       border: 1px solid var(--border);
-                      padding: 25px;
-                      border-radius: 20px;
+                      padding: 30px;
+                      border-radius: 24px;
                       box-shadow: var(--shadow-lg);
                       margin-bottom: 40px;
                   }
@@ -315,8 +323,7 @@ jobs:
                   
                   .search-icon {
                       position: absolute;
-                      left: 20px;
-                      top: 50%;
+                      left: 22px; top: 50%;
                       transform: translateY(-50%);
                       font-size: 1.2rem;
                       color: var(--text-muted);
@@ -326,7 +333,7 @@ jobs:
                       width: 100%;
                       padding: 18px 20px 18px 55px;
                       border: 2px solid var(--border);
-                      border-radius: 15px;
+                      border-radius: 16px;
                       font-size: 1rem;
                       font-family: 'Inter', sans-serif;
                       background: var(--bg);
@@ -337,12 +344,10 @@ jobs:
                   .search-bar:focus {
                       outline: none;
                       border-color: var(--primary);
-                      box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+                      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
                   }
                   
-                  .search-bar::placeholder {
-                      color: var(--text-muted);
-                  }
+                  .search-bar::placeholder { color: var(--text-muted); }
                   
                   /* Filter Tags */
                   .filter-tags {
@@ -353,35 +358,56 @@ jobs:
                   }
                   
                   .filter-tag {
-                      padding: 8px 16px;
+                      padding: 10px 18px;
                       background: var(--bg);
-                      border: 1px solid var(--border);
+                      border: 2px solid var(--border);
                       border-radius: 30px;
                       font-size: 0.85rem;
                       cursor: pointer;
                       transition: all 0.3s;
-                      font-weight: 500;
+                      font-weight: 600;
                   }
                   
-                  .filter-tag:hover, .filter-tag.active {
-                      background: var(--primary);
-                      color: white;
+                  .filter-tag:hover {
                       border-color: var(--primary);
+                      color: var(--primary);
                   }
                   
-                  /* Grid */
+                  .filter-tag.active {
+                      background: linear-gradient(135deg, var(--primary), var(--secondary));
+                      color: white;
+                      border-color: transparent;
+                  }
+                  
+                  /* Section Title */
+                  .section-header {
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 25px;
+                  }
+                  
                   .section-title {
                       font-size: 1.5rem;
                       font-weight: 700;
-                      margin-bottom: 25px;
                       display: flex;
                       align-items: center;
                       gap: 10px;
                   }
                   
+                  .paper-count {
+                      background: var(--bg-card);
+                      padding: 8px 16px;
+                      border-radius: 30px;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                      border: 1px solid var(--border);
+                  }
+                  
+                  /* Grid */
                   .grid {
                       display: grid;
-                      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
                       gap: 25px;
                   }
                   
@@ -390,8 +416,8 @@ jobs:
                       background: var(--bg-card);
                       backdrop-filter: blur(20px);
                       border: 1px solid var(--border);
-                      padding: 28px;
-                      border-radius: 20px;
+                      padding: 30px;
+                      border-radius: 24px;
                       box-shadow: var(--shadow);
                       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                       display: flex;
@@ -403,22 +429,22 @@ jobs:
                   .card::before {
                       content: '';
                       position: absolute;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 4px;
-                      background: var(--gradient);
-                      opacity: 0;
-                      transition: opacity 0.3s;
+                      top: 0; left: 0;
+                      width: 100%; height: 5px;
+                      background: linear-gradient(90deg, var(--primary), var(--secondary));
+                      transform: scaleX(0);
+                      transform-origin: left;
+                      transition: transform 0.4s;
                   }
                   
                   .card:hover {
-                      transform: translateY(-8px);
+                      transform: translateY(-10px);
                       box-shadow: var(--shadow-lg);
+                      border-color: var(--primary);
                   }
                   
                   .card:hover::before {
-                      opacity: 1;
+                      transform: scaleX(1);
                   }
                   
                   .card-header {
@@ -431,9 +457,9 @@ jobs:
                   .tag {
                       display: inline-flex;
                       align-items: center;
-                      gap: 5px;
-                      padding: 6px 14px;
-                      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+                      gap: 6px;
+                      padding: 8px 16px;
+                      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.15));
                       color: var(--primary);
                       border-radius: 30px;
                       font-size: 0.75rem;
@@ -445,22 +471,25 @@ jobs:
                   .new-badge {
                       background: linear-gradient(135deg, #10b981, #059669);
                       color: white;
-                      padding: 4px 10px;
+                      padding: 6px 12px;
                       border-radius: 20px;
                       font-size: 0.7rem;
                       font-weight: 700;
                       animation: pulse 2s infinite;
+                      display: flex;
+                      align-items: center;
+                      gap: 4px;
                   }
                   
                   @keyframes pulse {
-                      0%, 100% { opacity: 1; }
-                      50% { opacity: 0.7; }
+                      0%, 100% { opacity: 1; transform: scale(1); }
+                      50% { opacity: 0.8; transform: scale(1.05); }
                   }
                   
                   .title {
-                      font-size: 1.25rem;
+                      font-size: 1.3rem;
                       font-weight: 700;
-                      margin-bottom: 8px;
+                      margin-bottom: 10px;
                       color: var(--text);
                       line-height: 1.4;
                   }
@@ -476,104 +505,126 @@ jobs:
                   .meta {
                       display: flex;
                       align-items: center;
-                      gap: 15px;
+                      gap: 20px;
                       font-size: 0.8rem;
                       color: var(--text-muted);
                       margin-bottom: 20px;
+                      padding-top: 15px;
+                      border-top: 1px solid var(--border);
                   }
                   
                   .meta-item {
                       display: flex;
                       align-items: center;
-                      gap: 5px;
+                      gap: 6px;
                   }
                   
                   .download-btn {
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      gap: 8px;
-                      background: var(--gradient);
+                      gap: 10px;
+                      background: linear-gradient(135deg, var(--primary), var(--secondary));
                       color: white;
-                      padding: 14px 20px;
+                      padding: 16px 24px;
                       text-decoration: none;
-                      border-radius: 12px;
-                      font-weight: 600;
-                      font-size: 0.95rem;
+                      border-radius: 14px;
+                      font-weight: 700;
+                      font-size: 1rem;
                       transition: all 0.3s;
-                      box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+                      box-shadow: 0 4px 15px rgba(99,102,241,0.4);
                   }
                   
                   .download-btn:hover {
-                      transform: scale(1.02);
-                      box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+                      transform: scale(1.03);
+                      box-shadow: 0 8px 25px rgba(99,102,241,0.5);
                   }
                   
                   /* Empty State */
                   .empty-state {
                       text-align: center;
-                      padding: 60px 20px;
+                      padding: 80px 20px;
                       grid-column: 1 / -1;
                   }
                   
                   .empty-state-icon {
-                      font-size: 4rem;
+                      font-size: 5rem;
                       margin-bottom: 20px;
+                      opacity: 0.8;
                   }
                   
                   .empty-state h3 {
-                      font-size: 1.5rem;
+                      font-size: 1.8rem;
                       margin-bottom: 10px;
+                      color: var(--text);
                   }
                   
                   .empty-state p {
                       color: var(--text-muted);
+                      font-size: 1.1rem;
                   }
                   
                   /* Footer */
                   .footer {
                       text-align: center;
-                      padding: 40px 20px;
+                      padding: 50px 20px;
                       color: var(--text-muted);
-                      font-size: 0.9rem;
+                      font-size: 0.95rem;
                       border-top: 1px solid var(--border);
-                      margin-top: 60px;
+                      margin-top: 80px;
                   }
                   
-                  .footer a {
-                      color: var(--primary);
-                      text-decoration: none;
-                  }
-                  
-                  /* Responsive */
-                  @media (max-width: 768px) {
-                      .hero { padding: 60px 20px 100px; }
-                      .hero-stats { gap: 25px; }
-                      .stat-number { font-size: 1.8rem; }
-                      .grid { grid-template-columns: 1fr; }
-                      .container { margin-top: -40px; }
-                  }
-                  
-                  /* Loading Animation */
-                  .loading {
+                  .footer-links {
+                      margin-top: 15px;
                       display: flex;
                       justify-content: center;
+                      gap: 25px;
+                  }
+                  
+                  .footer-link {
+                      color: var(--primary);
+                      text-decoration: none;
+                      font-weight: 600;
+                      transition: all 0.3s;
+                      display: flex;
                       align-items: center;
-                      padding: 60px;
+                      gap: 6px;
+                  }
+                  
+                  .footer-link:hover {
+                      color: var(--secondary);
+                  }
+                  
+                  /* Loading */
+                  .loading {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      justify-content: center;
+                      padding: 80px;
                       grid-column: 1 / -1;
+                      gap: 20px;
                   }
                   
                   .spinner {
-                      width: 50px;
-                      height: 50px;
+                      width: 50px; height: 50px;
                       border: 4px solid var(--border);
                       border-top-color: var(--primary);
                       border-radius: 50%;
                       animation: spin 1s linear infinite;
                   }
                   
-                  @keyframes spin {
-                      to { transform: rotate(360deg); }
+                  @keyframes spin { to { transform: rotate(360deg); } }
+                  
+                  /* Responsive */
+                  @media (max-width: 768px) {
+                      .hero { padding: 60px 20px 110px; }
+                      .hero-stats { gap: 30px; }
+                      .stat-number { font-size: 2rem; }
+                      .grid { grid-template-columns: 1fr; }
+                      .container { margin-top: -50px; }
+                      .section-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+                      .footer-links { flex-direction: column; gap: 15px; }
                   }
               </style>
           </head>
@@ -586,8 +637,9 @@ jobs:
               
               <div class="hero">
                   <div class="hero-content">
-                      <h1>👨‍🏫 Riyaaz Sir's Portal</h1>
-                      <p>Your gateway to success. Download premium study materials and ace your exams!</p>
+                      <div class="hero-icon">👨‍🏫</div>
+                      <h1 id="site-name">Study Portal</h1>
+                      <p id="site-tagline">Your gateway to academic excellence!</p>
                       <div class="hero-stats">
                           <div class="stat">
                               <div class="stat-number" id="total-papers">0</div>
@@ -605,32 +657,40 @@ jobs:
                   <div class="search-section">
                       <div class="search-wrapper">
                           <span class="search-icon">🔍</span>
-                          <input type="text" id="search" class="search-bar" placeholder="Search papers by name or subject..." onkeyup="filterPapers()">
+                          <input type="text" id="search" class="search-bar" placeholder="Search papers by name, subject, or description..." onkeyup="filterPapers()">
                       </div>
                       <div class="filter-tags" id="filter-tags">
-                          <span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>
+                          <span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>
                       </div>
                   </div>
                   
-                  <h2 class="section-title">📄 Available Papers</h2>
+                  <div class="section-header">
+                      <h2 class="section-title">📄 Available Papers</h2>
+                      <span class="paper-count" id="showing-count">Showing 0 papers</span>
+                  </div>
                   
                   <div class="grid" id="paper-grid">
                       <div class="loading">
                           <div class="spinner"></div>
+                          <p>Loading papers...</p>
                       </div>
                   </div>
               </div>
               
               <div class="footer">
-                  <p>Made with ❤️ for <strong>Riyaaz Sir's Students</strong></p>
-                  <p style="margin-top: 5px; font-size: 0.8rem;">© 2024 All rights reserved</p>
+                  <p id="footer-text">Made with ❤️ for Students</p>
+                  <p style="margin-top: 8px; font-size: 0.85rem;">© 2024 All rights reserved</p>
+                  <div class="footer-links">
+                      <a href="admin.html" class="footer-link">🔐 Admin Portal</a>
+                  </div>
               </div>
               
               <script>
                   let allPapers = [];
+                  let siteConfig = {};
                   let currentFilter = 'all';
                   
-                  // Theme Management
+                  // Theme
                   function initTheme() {
                       const saved = localStorage.getItem('theme') || 'light';
                       document.documentElement.setAttribute('data-theme', saved);
@@ -647,6 +707,36 @@ jobs:
                   
                   function updateThemeIcon(theme) {
                       document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+                  }
+                  
+                  // Load Config
+                  async function loadConfig() {
+                      try {
+                          const res = await fetch('config.json?t=' + Date.now());
+                          siteConfig = await res.json();
+                          applyConfig();
+                      } catch (e) {
+                          console.log("Using default config");
+                      }
+                  }
+                  
+                  function applyConfig() {
+                      if (siteConfig.siteName) {
+                          document.getElementById('site-name').textContent = siteConfig.siteName;
+                          document.getElementById('page-title').textContent = siteConfig.siteName;
+                      }
+                      if (siteConfig.siteTagline) {
+                          document.getElementById('site-tagline').textContent = siteConfig.siteTagline;
+                      }
+                      if (siteConfig.footerText) {
+                          document.getElementById('footer-text').textContent = siteConfig.footerText;
+                      }
+                      if (siteConfig.primaryColor) {
+                          document.documentElement.style.setProperty('--primary', siteConfig.primaryColor);
+                      }
+                      if (siteConfig.secondaryColor) {
+                          document.documentElement.style.setProperty('--secondary', siteConfig.secondaryColor);
+                      }
                   }
                   
                   // Load Papers
@@ -677,13 +767,15 @@ jobs:
                   
                   function buildFilterTags() {
                       const visible = allPapers.filter(p => p.visible !== false);
-                      const subjects = [...new Set(visible.map(p => p.subject))];
+                      const subjects = [...new Set(visible.map(p => p.subject))].sort();
                       const container = document.getElementById('filter-tags');
                       
-                      container.innerHTML = `<span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>`;
+                      container.innerHTML = `<span class="filter-tag active" onclick="filterBySubject('all', this)">📚 All Papers</span>`;
                       
-                      subjects.forEach(sub => {
-                          container.innerHTML += `<span class="filter-tag" data-subject="${sub}" onclick="filterBySubject('${sub}', this)">${sub}</span>`;
+                      const icons = ['📐', '🔬', '🧪', '📖', '🌍', '💻', '🎨', '📊', '🧮', '🔢'];
+                      subjects.forEach((sub, i) => {
+                          const icon = icons[i % icons.length];
+                          container.innerHTML += `<span class="filter-tag" onclick="filterBySubject('${sub}', this)">${icon} ${sub}</span>`;
                       });
                   }
                   
@@ -711,6 +803,7 @@ jobs:
                       }
                       
                       renderPapers(filtered);
+                      document.getElementById('showing-count').textContent = `Showing ${filtered.length} paper${filtered.length !== 1 ? 's' : ''}`;
                   }
                   
                   function isNew(timestamp) {
@@ -734,9 +827,7 @@ jobs:
                       
                       grid.innerHTML = papers.map(paper => {
                           const date = new Date(paper.id).toLocaleDateString('en-US', { 
-                              year: 'numeric', 
-                              month: 'short', 
-                              day: 'numeric' 
+                              year: 'numeric', month: 'short', day: 'numeric' 
                           });
                           
                           return `
@@ -746,21 +837,24 @@ jobs:
                                       ${isNew(paper.id) ? '<span class="new-badge">✨ NEW</span>' : ''}
                                   </div>
                                   <h3 class="title">${paper.name}</h3>
-                                  <p class="description">${paper.description || 'Download this sample paper to boost your preparation!'}</p>
+                                  <p class="description">${paper.description || 'Download this sample paper to boost your exam preparation!'}</p>
                                   <div class="meta">
                                       <span class="meta-item">📅 ${date}</span>
-                                      <span class="meta-item">📄 PDF</span>
+                                      <span class="meta-item">📄 PDF Document</span>
                                   </div>
                                   <a href="${paper.link}" class="download-btn" download>
-                                      <span>📥</span> Download Now
+                                      📥 Download Now
                                   </a>
                               </div>
                           `;
                       }).join('');
+                      
+                      document.getElementById('showing-count').textContent = `Showing ${papers.length} paper${papers.length !== 1 ? 's' : ''}`;
                   }
                   
-                  // Initialize
+                  // Init
                   initTheme();
+                  loadConfig();
                   loadPapers();
               </script>
           </body>
@@ -768,7 +862,7 @@ jobs:
           HTMLEOF
 
           # ============================================
-          # CREATE admin.html (Admin Dashboard)
+          # CREATE admin.html (Full Admin Dashboard)
           # ============================================
           cat > admin.html << 'ADMINEOF'
           <!DOCTYPE html>
@@ -776,7 +870,7 @@ jobs:
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Admin Dashboard | Riyaaz Sir</title>
+              <title>Admin Dashboard</title>
               <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
               <style>
                   :root {
@@ -788,6 +882,7 @@ jobs:
                       --border: #334155;
                       --primary: #6366f1;
                       --primary-hover: #4f46e5;
+                      --secondary: #ec4899;
                       --success: #10b981;
                       --warning: #f59e0b;
                       --danger: #ef4444;
@@ -804,12 +899,6 @@ jobs:
                       line-height: 1.6;
                   }
                   
-                  .container {
-                      max-width: 1400px;
-                      margin: 0 auto;
-                      padding: 20px;
-                  }
-                  
                   /* Login Screen */
                   .login-container {
                       min-height: 100vh;
@@ -817,16 +906,23 @@ jobs:
                       align-items: center;
                       justify-content: center;
                       padding: 20px;
+                      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
                   }
                   
                   .login-box {
                       background: var(--bg-card);
                       border: 1px solid var(--border);
-                      border-radius: 20px;
+                      border-radius: 24px;
                       padding: 50px 40px;
                       width: 100%;
-                      max-width: 420px;
+                      max-width: 440px;
                       text-align: center;
+                      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+                  }
+                  
+                  .login-icon {
+                      font-size: 4rem;
+                      margin-bottom: 20px;
                   }
                   
                   .login-box h1 {
@@ -837,63 +933,70 @@ jobs:
                       -webkit-text-fill-color: transparent;
                   }
                   
-                  .login-box p {
+                  .login-box > p {
                       color: var(--text-muted);
-                      margin-bottom: 30px;
+                      margin-bottom: 35px;
+                      font-size: 0.95rem;
                   }
                   
                   /* Form Elements */
+                  .form-group {
+                      margin-bottom: 20px;
+                      text-align: left;
+                  }
+                  
+                  label {
+                      display: block;
+                      font-size: 0.85rem;
+                      font-weight: 600;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                  }
+                  
                   input, select, textarea {
                       width: 100%;
-                      padding: 14px 18px;
+                      padding: 16px 20px;
                       border: 2px solid var(--border);
-                      border-radius: 12px;
+                      border-radius: 14px;
                       background: var(--bg-input);
                       color: var(--text);
                       font-family: 'Inter', sans-serif;
-                      font-size: 0.95rem;
+                      font-size: 1rem;
                       transition: all 0.3s;
-                      margin-bottom: 15px;
                   }
                   
                   input:focus, select:focus, textarea:focus {
                       outline: none;
                       border-color: var(--primary);
-                      box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+                      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
                   }
                   
-                  input::placeholder, textarea::placeholder {
-                      color: var(--text-muted);
-                  }
-                  
-                  label {
-                      display: block;
-                      text-align: left;
-                      font-size: 0.85rem;
-                      font-weight: 600;
-                      color: var(--text-muted);
-                      margin-bottom: 6px;
-                      text-transform: uppercase;
-                      letter-spacing: 0.5px;
-                  }
+                  input::placeholder, textarea::placeholder { color: var(--text-muted); }
                   
                   button {
                       width: 100%;
-                      padding: 14px 20px;
+                      padding: 16px 24px;
                       border: none;
-                      border-radius: 12px;
+                      border-radius: 14px;
                       background: var(--gradient);
                       color: white;
                       font-family: 'Inter', sans-serif;
                       font-size: 1rem;
-                      font-weight: 600;
+                      font-weight: 700;
                       cursor: pointer;
                       transition: all 0.3s;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 10px;
                   }
                   
                   button:hover {
                       opacity: 0.9;
                       transform: translateY(-2px);
+                      box-shadow: 0 10px 25px rgba(99,102,241,0.3);
                   }
                   
                   button:disabled {
@@ -902,7 +1005,27 @@ jobs:
                       transform: none;
                   }
                   
-                  /* Dashboard Header */
+                  .back-link {
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 8px;
+                      color: var(--text-muted);
+                      text-decoration: none;
+                      margin-top: 25px;
+                      font-size: 0.9rem;
+                      transition: color 0.3s;
+                  }
+                  
+                  .back-link:hover { color: var(--primary); }
+                  
+                  /* Dashboard */
+                  .container {
+                      max-width: 1400px;
+                      margin: 0 auto;
+                      padding: 25px;
+                  }
+                  
+                  /* Header */
                   .header {
                       display: flex;
                       justify-content: space-between;
@@ -910,26 +1033,33 @@ jobs:
                       padding: 25px 30px;
                       background: var(--bg-card);
                       border: 1px solid var(--border);
-                      border-radius: 16px;
+                      border-radius: 20px;
                       margin-bottom: 25px;
                   }
                   
-                  .header h1 {
-                      font-size: 1.5rem;
+                  .header-left h1 {
+                      font-size: 1.6rem;
                       display: flex;
                       align-items: center;
-                      gap: 10px;
+                      gap: 12px;
+                  }
+                  
+                  .header-left p {
+                      color: var(--text-muted);
+                      margin-top: 5px;
+                      font-size: 0.9rem;
                   }
                   
                   .header-actions {
                       display: flex;
-                      gap: 10px;
+                      gap: 12px;
                   }
                   
-                  .btn-sm {
-                      width: auto;
-                      padding: 10px 20px;
+                  .btn {
+                      padding: 12px 20px;
                       font-size: 0.9rem;
+                      border-radius: 12px;
+                      width: auto;
                   }
                   
                   .btn-outline {
@@ -940,20 +1070,52 @@ jobs:
                   
                   .btn-outline:hover {
                       background: var(--border);
+                      transform: none;
+                      box-shadow: none;
                   }
                   
-                  .btn-danger {
-                      background: var(--danger);
+                  .btn-danger { background: var(--danger); }
+                  .btn-success { background: var(--success); }
+                  .btn-warning { background: var(--warning); color: #000; }
+                  .btn-primary { background: var(--primary); }
+                  
+                  /* Tabs */
+                  .tabs {
+                      display: flex;
+                      gap: 10px;
+                      margin-bottom: 25px;
+                      background: var(--bg-card);
+                      padding: 8px;
+                      border-radius: 16px;
+                      border: 1px solid var(--border);
                   }
                   
-                  .btn-success {
-                      background: var(--success);
+                  .tab {
+                      flex: 1;
+                      padding: 14px 20px;
+                      background: transparent;
+                      border: none;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      cursor: pointer;
+                      border-radius: 12px;
+                      transition: all 0.3s;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 8px;
                   }
                   
-                  .btn-warning {
-                      background: var(--warning);
-                      color: #000;
+                  .tab:hover { color: var(--text); background: var(--bg); }
+                  
+                  .tab.active {
+                      background: var(--gradient);
+                      color: white;
                   }
+                  
+                  /* Tab Content */
+                  .tab-content { display: none; }
+                  .tab-content.active { display: block; }
                   
                   /* Stats Grid */
                   .stats-grid {
@@ -966,18 +1128,24 @@ jobs:
                   .stat-card {
                       background: var(--bg-card);
                       border: 1px solid var(--border);
-                      border-radius: 16px;
+                      border-radius: 18px;
                       padding: 25px;
                       text-align: center;
+                      transition: all 0.3s;
+                  }
+                  
+                  .stat-card:hover {
+                      transform: translateY(-5px);
+                      border-color: var(--primary);
                   }
                   
                   .stat-card .icon {
-                      font-size: 2rem;
-                      margin-bottom: 10px;
+                      font-size: 2.5rem;
+                      margin-bottom: 12px;
                   }
                   
                   .stat-card .number {
-                      font-size: 2.5rem;
+                      font-size: 2.8rem;
                       font-weight: 800;
                       background: var(--gradient);
                       -webkit-background-clip: text;
@@ -989,34 +1157,39 @@ jobs:
                       font-size: 0.9rem;
                       text-transform: uppercase;
                       letter-spacing: 1px;
+                      margin-top: 5px;
                   }
                   
                   /* Cards */
                   .card {
                       background: var(--bg-card);
                       border: 1px solid var(--border);
-                      border-radius: 16px;
+                      border-radius: 20px;
                       padding: 30px;
                       margin-bottom: 25px;
                   }
                   
                   .card h2 {
-                      font-size: 1.3rem;
-                      margin-bottom: 20px;
+                      font-size: 1.4rem;
+                      margin-bottom: 25px;
                       display: flex;
                       align-items: center;
-                      gap: 10px;
+                      gap: 12px;
+                      padding-bottom: 15px;
+                      border-bottom: 1px solid var(--border);
                   }
                   
                   .upload-grid {
                       display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                       gap: 20px;
                   }
                   
                   /* Table */
                   .table-container {
                       overflow-x: auto;
+                      border-radius: 12px;
+                      border: 1px solid var(--border);
                   }
                   
                   table {
@@ -1025,32 +1198,32 @@ jobs:
                   }
                   
                   th, td {
-                      padding: 16px;
+                      padding: 18px 16px;
                       text-align: left;
                       border-bottom: 1px solid var(--border);
                   }
                   
                   th {
+                      background: var(--bg);
                       color: var(--text-muted);
                       font-size: 0.8rem;
                       text-transform: uppercase;
                       letter-spacing: 1px;
-                      font-weight: 600;
+                      font-weight: 700;
                   }
                   
-                  tr:hover {
-                      background: rgba(255,255,255,0.02);
-                  }
+                  tr:hover { background: rgba(255,255,255,0.02); }
+                  tr:last-child td { border-bottom: none; }
                   
-                  /* Status Badges */
+                  /* Badges */
                   .badge {
                       display: inline-flex;
                       align-items: center;
-                      gap: 5px;
-                      padding: 6px 12px;
+                      gap: 6px;
+                      padding: 8px 14px;
                       border-radius: 30px;
                       font-size: 0.75rem;
-                      font-weight: 600;
+                      font-weight: 700;
                   }
                   
                   .badge-live {
@@ -1073,107 +1246,149 @@ jobs:
                   }
                   
                   .action-btn {
-                      padding: 8px 14px;
+                      padding: 10px 16px;
                       font-size: 0.8rem;
-                      border-radius: 8px;
+                      border-radius: 10px;
                       width: auto;
                       white-space: nowrap;
                   }
                   
-                  /* Status Message */
+                  /* Settings Grid */
+                  .settings-grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                      gap: 25px;
+                  }
+                  
+                  .settings-section {
+                      background: var(--bg);
+                      border: 1px solid var(--border);
+                      border-radius: 16px;
+                      padding: 25px;
+                  }
+                  
+                  .settings-section h3 {
+                      font-size: 1.1rem;
+                      margin-bottom: 20px;
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      color: var(--primary);
+                  }
+                  
+                  /* Color Picker */
+                  .color-input-wrapper {
+                      display: flex;
+                      gap: 10px;
+                      align-items: center;
+                  }
+                  
+                  input[type="color"] {
+                      width: 60px;
+                      height: 50px;
+                      padding: 5px;
+                      border-radius: 10px;
+                      cursor: pointer;
+                  }
+                  
+                  .color-input-wrapper input[type="text"] {
+                      flex: 1;
+                  }
+                  
+                  /* Status Bar */
                   .status-bar {
                       position: fixed;
-                      bottom: 20px;
+                      bottom: 25px;
                       left: 50%;
-                      transform: translateX(-50%);
+                      transform: translateX(-50%) translateY(100px);
                       background: var(--success);
                       color: white;
-                      padding: 15px 30px;
+                      padding: 16px 35px;
                       border-radius: 50px;
-                      font-weight: 600;
-                      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                      font-weight: 700;
+                      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
                       z-index: 1000;
-                      display: none;
+                      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
                   }
                   
                   .status-bar.show {
-                      display: block;
-                      animation: slideUp 0.5s ease;
-                  }
-                  
-                  @keyframes slideUp {
-                      from { transform: translateX(-50%) translateY(100px); opacity: 0; }
-                      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+                      transform: translateX(-50%) translateY(0);
                   }
                   
                   /* Modal */
                   .modal {
                       display: none;
                       position: fixed;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 100%;
-                      background: rgba(0,0,0,0.8);
+                      top: 0; left: 0;
+                      width: 100%; height: 100%;
+                      background: rgba(0,0,0,0.85);
                       align-items: center;
                       justify-content: center;
                       z-index: 1000;
                       padding: 20px;
+                      backdrop-filter: blur(5px);
                   }
                   
-                  .modal.show {
-                      display: flex;
-                  }
+                  .modal.show { display: flex; }
                   
                   .modal-content {
                       background: var(--bg-card);
                       border: 1px solid var(--border);
-                      border-radius: 20px;
-                      padding: 35px;
+                      border-radius: 24px;
+                      padding: 40px;
                       width: 100%;
-                      max-width: 500px;
+                      max-width: 520px;
+                      max-height: 90vh;
+                      overflow-y: auto;
                   }
                   
                   .modal-content h2 {
-                      margin-bottom: 20px;
+                      margin-bottom: 25px;
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
                   }
                   
                   .modal-actions {
                       display: flex;
-                      gap: 10px;
-                      margin-top: 20px;
+                      gap: 12px;
+                      margin-top: 25px;
                   }
                   
-                  /* Help Panel */
-                  .help-panel {
-                      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
-                      border: 1px solid var(--primary);
-                      border-radius: 16px;
-                      padding: 25px;
-                      margin-bottom: 25px;
+                  .modal-actions button { flex: 1; }
+                  
+                  /* Alert Box */
+                  .alert {
+                      padding: 15px 20px;
+                      border-radius: 12px;
+                      margin-bottom: 20px;
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
                   }
                   
-                  .help-panel h3 {
-                      color: var(--primary);
-                      margin-bottom: 15px;
+                  .alert-warning {
+                      background: rgba(245,158,11,0.15);
+                      border: 1px solid var(--warning);
+                      color: var(--warning);
                   }
                   
-                  .help-panel ul {
-                      margin-left: 20px;
-                      color: var(--text-muted);
-                  }
-                  
-                  .help-panel li {
-                      margin-bottom: 8px;
+                  .alert-success {
+                      background: rgba(16,185,129,0.15);
+                      border: 1px solid var(--success);
+                      color: var(--success);
                   }
                   
                   /* Responsive */
                   @media (max-width: 768px) {
-                      .header { flex-direction: column; gap: 15px; text-align: center; }
-                      .header-actions { width: 100%; justify-content: center; }
+                      .header { flex-direction: column; gap: 20px; text-align: center; }
+                      .header-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+                      .tabs { flex-wrap: wrap; }
+                      .tab { flex: 1 1 45%; }
                       .upload-grid { grid-template-columns: 1fr; }
+                      .settings-grid { grid-template-columns: 1fr; }
+                      th, td { padding: 14px 10px; font-size: 0.85rem; }
                       .action-btns { justify-content: center; }
-                      th, td { padding: 12px 8px; font-size: 0.85rem; }
                   }
               </style>
           </head>
@@ -1182,14 +1397,23 @@ jobs:
               <!-- LOGIN SCREEN -->
               <div id="login-screen" class="login-container">
                   <div class="login-box">
-                      <h1>🔐 Admin Portal</h1>
-                      <p>Welcome back, Riyaaz Sir! Enter your GitHub Token to continue.</p>
-                      <div>
-                          <label>GitHub Token</label>
-                          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx...">
+                      <div class="login-icon">🔐</div>
+                      <h1>Admin Portal</h1>
+                      <p>Enter your credentials to access the dashboard.</p>
+                      
+                      <div class="form-group">
+                          <label>Username</label>
+                          <input type="text" id="login-username" placeholder="Enter your username">
                       </div>
+                      
+                      <div class="form-group">
+                          <label>Password</label>
+                          <input type="password" id="login-password" placeholder="Enter your password">
+                      </div>
+                      
                       <button onclick="login()">🚀 Access Dashboard</button>
-                      <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">Your token is stored securely in your browser only.</p>
+                      
+                      <a href="index.html" class="back-link">← Back to Student Portal</a>
                   </div>
               </div>
               
@@ -1199,96 +1423,180 @@ jobs:
                       
                       <!-- Header -->
                       <div class="header">
-                          <div>
-                              <h1>👨‍🏫 Riyaaz Sir's Dashboard</h1>
-                              <p style="color: var(--text-muted); margin-top: 5px;">Manage your learning portal</p>
+                          <div class="header-left">
+                              <h1>👨‍🏫 <span id="admin-welcome">Admin Dashboard</span></h1>
+                              <p>Manage your learning portal with ease.</p>
                           </div>
                           <div class="header-actions">
-                              <button class="btn-sm btn-outline" onclick="window.open('index.html', '_blank')">👁️ View Site</button>
-                              <button class="btn-sm btn-outline" onclick="toggleHelp()">❓ Help</button>
-                              <button class="btn-sm btn-danger" onclick="logout()">🚪 Logout</button>
+                              <button class="btn btn-outline" onclick="window.open('index.html', '_blank')">👁️ View Site</button>
+                              <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
                           </div>
                       </div>
                       
-                      <!-- Help Panel (Hidden by default) -->
-                      <div class="help-panel" id="help-panel" style="display: none;">
-                          <h3>📖 Quick Guide for Riyaaz Sir</h3>
-                          <ul>
-                              <li><strong>Upload:</strong> Fill in details and click "Publish" to add new papers</li>
-                              <li><strong>Edit:</strong> Change paper name, subject, or description anytime</li>
-                              <li><strong>Replace PDF:</strong> Upload a corrected PDF without changing the listing</li>
-                              <li><strong>Hide/Show:</strong> Temporarily hide papers before/after exams</li>
-                              <li><strong>Delete:</strong> Permanently remove papers from the website</li>
-                              <li><strong>Tip:</strong> Use consistent subject names (Physics, Chemistry, Maths)</li>
-                          </ul>
+                      <!-- Tabs -->
+                      <div class="tabs">
+                          <button class="tab active" onclick="switchTab('papers', this)">📄 Papers</button>
+                          <button class="tab" onclick="switchTab('upload', this)">📤 Upload</button>
+                          <button class="tab" onclick="switchTab('settings', this)">⚙️ Settings</button>
                       </div>
                       
-                      <!-- Stats -->
-                      <div class="stats-grid">
-                          <div class="stat-card">
-                              <div class="icon">📚</div>
-                              <div class="number" id="stat-total">0</div>
-                              <div class="label">Total Papers</div>
-                          </div>
-                          <div class="stat-card">
-                              <div class="icon">🟢</div>
-                              <div class="number" id="stat-live">0</div>
-                              <div class="label">Live Papers</div>
-                          </div>
-                          <div class="stat-card">
-                              <div class="icon">🔴</div>
-                              <div class="number" id="stat-hidden">0</div>
-                              <div class="label">Hidden Papers</div>
-                          </div>
-                          <div class="stat-card">
-                              <div class="icon">📁</div>
-                              <div class="number" id="stat-subjects">0</div>
-                              <div class="label">Subjects</div>
-                          </div>
-                      </div>
-                      
-                      <!-- Upload Section -->
-                      <div class="card">
-                          <h2>📤 Upload New Paper</h2>
-                          <div class="upload-grid">
-                              <div>
-                                  <label>Paper Name *</label>
-                                  <input type="text" id="new-name" placeholder="e.g. Class 10 Physics Boards 2024">
+                      <!-- PAPERS TAB -->
+                      <div id="tab-papers" class="tab-content active">
+                          <!-- Stats -->
+                          <div class="stats-grid">
+                              <div class="stat-card">
+                                  <div class="icon">📚</div>
+                                  <div class="number" id="stat-total">0</div>
+                                  <div class="label">Total Papers</div>
                               </div>
-                              <div>
-                                  <label>Subject *</label>
-                                  <input type="text" id="new-subject" placeholder="e.g. Physics">
+                              <div class="stat-card">
+                                  <div class="icon">🟢</div>
+                                  <div class="number" id="stat-live">0</div>
+                                  <div class="label">Live</div>
                               </div>
-                              <div>
-                                  <label>PDF File *</label>
-                                  <input type="file" id="new-file" accept=".pdf">
+                              <div class="stat-card">
+                                  <div class="icon">🔴</div>
+                                  <div class="number" id="stat-hidden">0</div>
+                                  <div class="label">Hidden</div>
+                              </div>
+                              <div class="stat-card">
+                                  <div class="icon">📁</div>
+                                  <div class="number" id="stat-subjects">0</div>
+                                  <div class="label">Subjects</div>
                               </div>
                           </div>
-                          <div style="margin-top: 15px;">
-                              <label>Description (Optional)</label>
-                              <textarea id="new-desc" rows="2" placeholder="Add a short description for students..."></textarea>
+                          
+                          <!-- Papers Table -->
+                          <div class="card">
+                              <h2>🛠️ Manage Papers</h2>
+                              <div class="table-container">
+                                  <table>
+                                      <thead>
+                                          <tr>
+                                              <th>Status</th>
+                                              <th>Subject</th>
+                                              <th>Paper Name</th>
+                                              <th>Uploaded</th>
+                                              <th>Actions</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody id="paper-list">
+                                          <tr><td colspan="5" style="text-align:center; padding:50px;">Loading papers...</td></tr>
+                                      </tbody>
+                                  </table>
+                              </div>
                           </div>
-                          <button id="upload-btn" onclick="uploadNewPaper()" style="margin-top: 10px;">🚀 Publish to Website</button>
                       </div>
                       
-                      <!-- Manage Section -->
-                      <div class="card">
-                          <h2>🛠️ Manage Papers</h2>
-                          <div class="table-container">
-                              <table>
-                                  <thead>
-                                      <tr>
-                                          <th>Status</th>
-                                          <th>Subject</th>
-                                          <th>Paper Name</th>
-                                          <th>Uploaded</th>
-                                          <th>Actions</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody id="paper-list">
-                                      <tr><td colspan="5" style="text-align: center; padding: 40px;">Loading papers...</td></tr>
-                                  </tbody>
-                              </table>
+                      <!-- UPLOAD TAB -->
+                      <div id="tab-upload" class="tab-content">
+                          <div class="card">
+                              <h2>📤 Upload New Paper</h2>
+                              
+                              <div class="alert alert-warning" id="token-warning">
+                                  ⚠️ You must enter your GitHub Token in Settings before uploading!
+                              </div>
+                              
+                              <div class="upload-grid">
+                                  <div class="form-group">
+                                      <label>Paper Name *</label>
+                                      <input type="text" id="new-name" placeholder="e.g. Class 10 Physics Boards 2024">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Subject *</label>
+                                      <input type="text" id="new-subject" placeholder="e.g. Physics">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>PDF File *</label>
+                                      <input type="file" id="new-file" accept=".pdf">
+                                  </div>
+                              </div>
+                              <div class="form-group" style="margin-top: 15px;">
+                                  <label>Description (Optional)</label>
+                                  <textarea id="new-desc" rows="3" placeholder="Add a short description for students..."></textarea>
+                              </div>
+                              <button id="upload-btn" onclick="uploadNewPaper()" style="margin-top: 15px;">🚀 Publish to Website</button>
+                          </div>
+                      </div>
+                      
+                      <!-- SETTINGS TAB -->
+                      <div id="tab-settings" class="tab-content">
+                          <div class="settings-grid">
+                              
+                              <!-- GitHub Settings -->
+                              <div class="settings-section">
+                                  <h3>🔑 GitHub Connection</h3>
+                                  <div class="form-group">
+                                      <label>GitHub Username</label>
+                                      <input type="text" id="set-gh-username" placeholder="e.g. rajaprogrammer">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Repository Name</label>
+                                      <input type="text" id="set-repo-name" placeholder="e.g. sample-papers">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>GitHub Token (Required for uploads)</label>
+                                      <input type="password" id="set-gh-token" placeholder="ghp_xxxxxxxxxxxx...">
+                                  </div>
+                                  <button class="btn btn-primary" onclick="saveGitHubSettings()">💾 Save GitHub Settings</button>
+                              </div>
+                              
+                              <!-- Admin Credentials -->
+                              <div class="settings-section">
+                                  <h3>🔐 Admin Credentials</h3>
+                                  <div class="form-group">
+                                      <label>Admin Username</label>
+                                      <input type="text" id="set-admin-user" placeholder="Enter new username">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Admin Password</label>
+                                      <input type="password" id="set-admin-pass" placeholder="Enter new password">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Confirm Password</label>
+                                      <input type="password" id="set-admin-pass-confirm" placeholder="Confirm new password">
+                                  </div>
+                                  <button class="btn btn-warning" onclick="saveAdminCredentials()">🔒 Update Credentials</button>
+                              </div>
+                              
+                              <!-- Site Customization -->
+                              <div class="settings-section">
+                                  <h3>🎨 Site Customization</h3>
+                                  <div class="form-group">
+                                      <label>Site Name</label>
+                                      <input type="text" id="set-site-name" placeholder="e.g. Riyaaz Sir's Portal">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Site Tagline</label>
+                                      <input type="text" id="set-site-tagline" placeholder="e.g. Your gateway to excellence!">
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Footer Text</label>
+                                      <input type="text" id="set-footer" placeholder="e.g. Made with ❤️ for Students">
+                                  </div>
+                                  <button class="btn btn-success" onclick="saveSiteSettings()">✨ Update Site</button>
+                              </div>
+                              
+                              <!-- Theme Colors -->
+                              <div class="settings-section">
+                                  <h3>🌈 Theme Colors</h3>
+                                  <div class="form-group">
+                                      <label>Primary Color</label>
+                                      <div class="color-input-wrapper">
+                                          <input type="color" id="set-primary-color" value="#6366f1" onchange="document.getElementById('set-primary-text').value = this.value">
+                                          <input type="text" id="set-primary-text" value="#6366f1" placeholder="#6366f1">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Secondary Color</label>
+                                      <div class="color-input-wrapper">
+                                          <input type="color" id="set-secondary-color" value="#ec4899" onchange="document.getElementById('set-secondary-text').value = this.value">
+                                          <input type="text" id="set-secondary-text" value="#ec4899" placeholder="#ec4899">
+                                      </div>
+                                  </div>
+                                  <button class="btn btn-primary" onclick="saveThemeColors()">🎨 Update Colors</button>
+                              </div>
+                              
                           </div>
                       </div>
                       
@@ -1298,17 +1606,17 @@ jobs:
               <!-- Edit Modal -->
               <div class="modal" id="edit-modal">
                   <div class="modal-content">
-                      <h2>✏️ Edit Paper Details</h2>
+                      <h2>✏️ Edit Paper</h2>
                       <input type="hidden" id="edit-id">
-                      <div>
+                      <div class="form-group">
                           <label>Paper Name</label>
                           <input type="text" id="edit-name">
                       </div>
-                      <div>
+                      <div class="form-group">
                           <label>Subject</label>
                           <input type="text" id="edit-subject">
                       </div>
-                      <div>
+                      <div class="form-group">
                           <label>Description</label>
                           <textarea id="edit-desc" rows="3"></textarea>
                       </div>
@@ -1322,10 +1630,10 @@ jobs:
               <!-- Replace Modal -->
               <div class="modal" id="replace-modal">
                   <div class="modal-content">
-                      <h2>🔄 Replace PDF File</h2>
-                      <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a new PDF to replace the existing file. Students will automatically get the new version.</p>
+                      <h2>🔄 Replace PDF</h2>
+                      <p style="color: var(--text-muted); margin-bottom: 25px;">Upload a new PDF to replace the existing file. Students will automatically get the new version.</p>
                       <input type="hidden" id="replace-id">
-                      <div>
+                      <div class="form-group">
                           <label>Select New PDF</label>
                           <input type="file" id="replace-file" accept=".pdf">
                       </div>
@@ -1341,39 +1649,126 @@ jobs:
               
               <script>
                   // ==========================================
-                  // CONFIGURATION
+                  // STATE
                   // ==========================================
-                  const REPO = 'rajaprogrammer/sample-papers';
-                  // ==========================================
-                  
-                  let token = localStorage.getItem('riyaaz_token');
-                  let dbSha = '';
+                  let siteConfig = {};
                   let papersDb = [];
+                  let dbSha = '';
+                  let configSha = '';
+                  let ghToken = '';
                   
                   const b64Encode = str => btoa(unescape(encodeURIComponent(str)));
                   const b64Decode = str => decodeURIComponent(escape(atob(str)));
                   
-                  // Initialize
-                  if (token) showDashboard();
+                  // ==========================================
+                  // INITIALIZATION
+                  // ==========================================
+                  async function init() {
+                      // Load config
+                      try {
+                          const res = await fetch('config.json?t=' + Date.now());
+                          siteConfig = await res.json();
+                      } catch (e) {
+                          siteConfig = {
+                              adminUsername: 'riyaazsir',
+                              adminPassword: 'admin123',
+                              siteName: "Riyaaz Sir's Portal",
+                              siteTagline: 'Your gateway to academic excellence!',
+                              githubUsername: 'rajaprogrammer',
+                              repoName: 'sample-papers',
+                              footerText: "Made with ❤️ for Students",
+                              primaryColor: '#6366f1',
+                              secondaryColor: '#ec4899'
+                          };
+                      }
+                      
+                      // Check if logged in
+                      const savedSession = localStorage.getItem('admin_session');
+                      if (savedSession === 'active') {
+                          ghToken = localStorage.getItem('gh_token') || '';
+                          showDashboard();
+                      }
+                  }
                   
+                  init();
+                  
+                  // ==========================================
+                  // AUTH
+                  // ==========================================
                   function login() {
-                      token = document.getElementById('gh-token').value.trim();
-                      if (!token) return alert("Please enter your token!");
-                      localStorage.setItem('riyaaz_token', token);
-                      showDashboard();
+                      const username = document.getElementById('login-username').value.trim();
+                      const password = document.getElementById('login-password').value;
+                      
+                      if (!username || !password) {
+                          return alert('Please enter both username and password!');
+                      }
+                      
+                      if (username === siteConfig.adminUsername && password === siteConfig.adminPassword) {
+                          localStorage.setItem('admin_session', 'active');
+                          ghToken = localStorage.getItem('gh_token') || '';
+                          showDashboard();
+                      } else {
+                          alert('❌ Invalid username or password!');
+                      }
                   }
                   
                   function logout() {
-                      localStorage.removeItem('riyaaz_token');
+                      localStorage.removeItem('admin_session');
                       location.reload();
                   }
                   
                   async function showDashboard() {
                       document.getElementById('login-screen').style.display = 'none';
                       document.getElementById('dashboard').style.display = 'block';
-                      await fetchDatabase();
+                      
+                      document.getElementById('admin-welcome').textContent = `Welcome, ${siteConfig.adminUsername}!`;
+                      
+                      // Load settings into form
+                      loadSettingsForm();
+                      
+                      // Check token warning
+                      updateTokenWarning();
+                      
+                      // Load papers
+                      await fetchPapers();
                   }
                   
+                  function loadSettingsForm() {
+                      document.getElementById('set-gh-username').value = siteConfig.githubUsername || '';
+                      document.getElementById('set-repo-name').value = siteConfig.repoName || '';
+                      document.getElementById('set-gh-token').value = ghToken;
+                      document.getElementById('set-admin-user').value = siteConfig.adminUsername || '';
+                      document.getElementById('set-site-name').value = siteConfig.siteName || '';
+                      document.getElementById('set-site-tagline').value = siteConfig.siteTagline || '';
+                      document.getElementById('set-footer').value = siteConfig.footerText || '';
+                      document.getElementById('set-primary-color').value = siteConfig.primaryColor || '#6366f1';
+                      document.getElementById('set-primary-text').value = siteConfig.primaryColor || '#6366f1';
+                      document.getElementById('set-secondary-color').value = siteConfig.secondaryColor || '#ec4899';
+                      document.getElementById('set-secondary-text').value = siteConfig.secondaryColor || '#ec4899';
+                  }
+                  
+                  function updateTokenWarning() {
+                      const warning = document.getElementById('token-warning');
+                      if (ghToken) {
+                          warning.style.display = 'none';
+                      } else {
+                          warning.style.display = 'flex';
+                      }
+                  }
+                  
+                  // ==========================================
+                  // TABS
+                  // ==========================================
+                  function switchTab(tabName, btn) {
+                      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                      btn.classList.add('active');
+                      document.getElementById('tab-' + tabName).classList.add('active');
+                  }
+                  
+                  // ==========================================
+                  // STATUS
+                  // ==========================================
                   function showStatus(msg) {
                       const bar = document.getElementById('status-bar');
                       bar.textContent = msg;
@@ -1381,18 +1776,22 @@ jobs:
                       setTimeout(() => bar.classList.remove('show'), 4000);
                   }
                   
-                  function toggleHelp() {
-                      const panel = document.getElementById('help-panel');
-                      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-                  }
-                  
                   // ==========================================
                   // GITHUB API
                   // ==========================================
-                  async function fetchDatabase() {
+                  function getRepo() {
+                      return `${siteConfig.githubUsername}/${siteConfig.repoName}`;
+                  }
+                  
+                  async function fetchPapers() {
+                      if (!ghToken) {
+                          renderPapers();
+                          return;
+                      }
+                      
                       try {
-                          const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
-                              headers: { 'Authorization': `token ${token}` }
+                          const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers.json`, {
+                              headers: { 'Authorization': `token ${ghToken}` }
                           });
                           if (res.ok) {
                               const data = await res.json();
@@ -1401,29 +1800,94 @@ jobs:
                           } else {
                               papersDb = [];
                           }
-                          updateStats();
-                          renderPapers();
                       } catch (e) {
-                          alert("Error loading database. Check your token.");
-                          logout();
+                          papersDb = [];
+                      }
+                      
+                      updateStats();
+                      renderPapers();
+                  }
+                  
+                  async function fetchConfig() {
+                      try {
+                          const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/config.json`, {
+                              headers: { 'Authorization': `token ${ghToken}` }
+                          });
+                          if (res.ok) {
+                              const data = await res.json();
+                              configSha = data.sha;
+                              return JSON.parse(b64Decode(data.content));
+                          }
+                      } catch (e) {}
+                      return null;
+                  }
+                  
+                  async function savePapersToGitHub() {
+                      if (!ghToken) {
+                          alert('Please enter your GitHub Token in Settings first!');
+                          return false;
+                      }
+                      
+                      try {
+                          const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers.json`, {
+                              method: 'PUT',
+                              headers: { 'Authorization': `token ${ghToken}` },
+                              body: JSON.stringify({
+                                  message: 'Update papers database',
+                                  content: b64Encode(JSON.stringify(papersDb)),
+                                  sha: dbSha || undefined
+                              })
+                          });
+                          
+                          if (res.ok) {
+                              const data = await res.json();
+                              dbSha = data.content.sha;
+                              updateStats();
+                              renderPapers();
+                              showStatus('✅ Changes saved! Website updates in ~60 seconds.');
+                              return true;
+                          } else {
+                              throw new Error('Save failed');
+                          }
+                      } catch (e) {
+                          alert('Error saving: ' + e.message);
+                          return false;
                       }
                   }
                   
-                  async function saveDatabase() {
-                      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
-                          method: 'PUT',
-                          headers: { 'Authorization': `token ${token}` },
-                          body: JSON.stringify({
-                              message: "Update papers database",
-                              content: b64Encode(JSON.stringify(papersDb)),
-                              sha: dbSha || undefined
-                          })
-                      });
-                      const data = await res.json();
-                      dbSha = data.content.sha;
-                      updateStats();
-                      renderPapers();
-                      showStatus("✅ Changes saved! Website updates in ~60 seconds.");
+                  async function saveConfigToGitHub(newConfig) {
+                      if (!ghToken) {
+                          alert('Please enter your GitHub Token first!');
+                          return false;
+                      }
+                      
+                      // Fetch current SHA
+                      await fetchConfig();
+                      
+                      try {
+                          const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/config.json`, {
+                              method: 'PUT',
+                              headers: { 'Authorization': `token ${ghToken}` },
+                              body: JSON.stringify({
+                                  message: 'Update site configuration',
+                                  content: b64Encode(JSON.stringify(newConfig)),
+                                  sha: configSha || undefined
+                              })
+                          });
+                          
+                          if (res.ok) {
+                              const data = await res.json();
+                              configSha = data.content.sha;
+                              siteConfig = newConfig;
+                              showStatus('✅ Settings saved! Website updates in ~60 seconds.');
+                              return true;
+                          } else {
+                              throw new Error('Save failed');
+                          }
+                      } catch (e) {
+                          alert('Error saving config: ' + e.message);
+                          return false;
+                      }
                   }
                   
                   async function uploadFileToGit(file, fileName) {
@@ -1431,13 +1895,17 @@ jobs:
                           const reader = new FileReader();
                           reader.onload = async (e) => {
                               const b64 = e.target.result.split(',')[1];
-                              const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers/${fileName}`, {
-                                  method: 'PUT',
-                                  headers: { 'Authorization': `token ${token}` },
-                                  body: JSON.stringify({ message: `Upload ${fileName}`, content: b64 })
-                              });
-                              if (res.ok) resolve(`papers/${fileName}`);
-                              else reject("Upload failed");
+                              try {
+                                  const res = await fetch(`https://api.github.com/repos/${getRepo()}/contents/papers/${fileName}`, {
+                                      method: 'PUT',
+                                      headers: { 'Authorization': `token ${ghToken}` },
+                                      body: JSON.stringify({ message: `Upload ${fileName}`, content: b64 })
+                                  });
+                                  if (res.ok) resolve(`papers/${fileName}`);
+                                  else reject('Upload failed');
+                              } catch (err) {
+                                  reject(err);
+                              }
                           };
                           reader.readAsDataURL(file);
                       });
@@ -1462,7 +1930,11 @@ jobs:
                       const list = document.getElementById('paper-list');
                       
                       if (papersDb.length === 0) {
-                          list.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-muted);">No papers uploaded yet. Start by uploading your first paper above!</td></tr>`;
+                          list.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:60px; color: var(--text-muted);">No papers uploaded yet. Go to Upload tab to add your first paper!</td></tr                  function renderPapers() {
+                      const list = document.getElementById('paper-list');
+                      
+                      if (papersDb.length === 0) {
+                          list.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:60px; color: var(--text-muted);">No papers uploaded yet. Go to Upload tab to add your first paper!</td></tr>`;
                           return;
                       }
                       
@@ -1480,7 +1952,7 @@ jobs:
                                   <td><strong style="color: var(--primary);">${p.subject}</strong></td>
                                   <td>
                                       <strong>${p.name}</strong>
-                                      ${p.description ? `<br><small style="color: var(--text-muted);">${p.description.substring(0, 50)}...</small>` : ''}
+                                      ${p.description ? `<br><small style="color: var(--text-muted);">${p.description.substring(0, 50)}${p.description.length > 50 ? '...' : ''}</small>` : ''}
                                   </td>
                                   <td style="color: var(--text-muted);">${date}</td>
                                   <td>
@@ -1497,7 +1969,7 @@ jobs:
                   }
                   
                   // ==========================================
-                  // ACTIONS
+                  // PAPER ACTIONS
                   // ==========================================
                   async function uploadNewPaper() {
                       const name = document.getElementById('new-name').value.trim();
@@ -1507,11 +1979,15 @@ jobs:
                       const btn = document.getElementById('upload-btn');
                       
                       if (!name || !subject || !fileInput.files.length) {
-                          return alert("Please fill in all required fields!");
+                          return alert('Please fill in all required fields!');
+                      }
+                      
+                      if (!ghToken) {
+                          return alert('Please enter your GitHub Token in Settings first!');
                       }
                       
                       btn.disabled = true;
-                      btn.textContent = "⏳ Uploading...";
+                      btn.innerHTML = '⏳ Uploading...';
                       
                       try {
                           const file = fileInput.files[0];
@@ -1527,7 +2003,7 @@ jobs:
                               visible: true
                           });
                           
-                          await saveDatabase();
+                          await savePapersToGitHub();
                           
                           // Clear form
                           document.getElementById('new-name').value = '';
@@ -1535,24 +2011,29 @@ jobs:
                           document.getElementById('new-desc').value = '';
                           fileInput.value = '';
                           
+                          showStatus('✅ Paper uploaded successfully!');
+                          
                       } catch (e) {
-                          alert("Upload failed: " + e);
+                          alert('Upload failed: ' + e);
                       }
                       
                       btn.disabled = false;
-                      btn.textContent = "🚀 Publish to Website";
+                      btn.innerHTML = '🚀 Publish to Website';
                   }
                   
                   async function toggleVisibility(id) {
                       const paper = papersDb.find(p => p.id === id);
-                      paper.visible = paper.visible === false ? true : false;
-                      await saveDatabase();
+                      if (paper) {
+                          paper.visible = paper.visible === false ? true : false;
+                          await savePapersToGitHub();
+                      }
                   }
                   
                   async function deletePaper(id) {
-                      if (!confirm("⚠️ Are you sure you want to permanently delete this paper?")) return;
+                      if (!confirm('⚠️ Are you sure you want to permanently delete this paper?')) return;
+                      
                       papersDb = papersDb.filter(p => p.id !== id);
-                      await saveDatabase();
+                      await savePapersToGitHub();
                   }
                   
                   // ==========================================
@@ -1560,10 +2041,13 @@ jobs:
                   // ==========================================
                   function openEditModal(id) {
                       const paper = papersDb.find(p => p.id === id);
+                      if (!paper) return;
+                      
                       document.getElementById('edit-id').value = id;
                       document.getElementById('edit-name').value = paper.name;
                       document.getElementById('edit-subject').value = paper.subject;
                       document.getElementById('edit-desc').value = paper.description || '';
+                      
                       document.getElementById('edit-modal').classList.add('show');
                   }
                   
@@ -1571,12 +2055,14 @@ jobs:
                       const id = parseInt(document.getElementById('edit-id').value);
                       const paper = papersDb.find(p => p.id === id);
                       
-                      paper.name = document.getElementById('edit-name').value.trim();
-                      paper.subject = document.getElementById('edit-subject').value.trim();
-                      paper.description = document.getElementById('edit-desc').value.trim();
-                      
-                      closeModal('edit-modal');
-                      await saveDatabase();
+                      if (paper) {
+                          paper.name = document.getElementById('edit-name').value.trim();
+                          paper.subject = document.getElementById('edit-subject').value.trim();
+                          paper.description = document.getElementById('edit-desc').value.trim();
+                          
+                          await savePapersToGitHub();
+                          closeModal('edit-modal');
+                      }
                   }
                   
                   // ==========================================
@@ -1593,35 +2079,40 @@ jobs:
                       const fileInput = document.getElementById('replace-file');
                       const btn = document.getElementById('replace-btn');
                       
-                      if (!fileInput.files.length) return alert("Please select a PDF file!");
+                      if (!fileInput.files.length) {
+                          return alert('Please select a PDF file!');
+                      }
                       
                       btn.disabled = true;
-                      btn.textContent = "⏳ Uploading...";
+                      btn.innerHTML = '⏳ Uploading...';
                       
                       try {
                           const file = fileInput.files[0];
-                          const fileName = 'r' + Date.now() + '.pdf';
+                          const fileName = 'replaced_' + Date.now() + '.pdf';
                           const newLink = await uploadFileToGit(file, fileName);
                           
                           const paper = papersDb.find(p => p.id === id);
-                          paper.link = newLink;
+                          if (paper) {
+                              paper.link = newLink;
+                              await savePapersToGitHub();
+                          }
                           
                           closeModal('replace-modal');
-                          await saveDatabase();
+                          showStatus('✅ PDF replaced successfully!');
                           
                       } catch (e) {
-                          alert("Replace failed: " + e);
+                          alert('Replace failed: ' + e);
                       }
                       
                       btn.disabled = false;
-                      btn.textContent = "📤 Upload New PDF";
+                      btn.innerHTML = '📤 Upload New PDF';
                   }
                   
                   function closeModal(modalId) {
                       document.getElementById(modalId).classList.remove('show');
                   }
                   
-                  // Close modal on outside click
+                  // Close modals on outside click
                   document.querySelectorAll('.modal').forEach(modal => {
                       modal.addEventListener('click', (e) => {
                           if (e.target === modal) {
@@ -1629,6 +2120,88 @@ jobs:
                           }
                       });
                   });
+                  
+                  // ==========================================
+                  // SETTINGS FUNCTIONS
+                  // ==========================================
+                  function saveGitHubSettings() {
+                      const username = document.getElementById('set-gh-username').value.trim();
+                      const repo = document.getElementById('set-repo-name').value.trim();
+                      const token = document.getElementById('set-gh-token').value.trim();
+                      
+                      if (!username || !repo) {
+                          return alert('Please enter GitHub username and repository name!');
+                      }
+                      
+                      // Save token locally (not to GitHub for security)
+                      if (token) {
+                          localStorage.setItem('gh_token', token);
+                          ghToken = token;
+                      }
+                      
+                      // Update config
+                      siteConfig.githubUsername = username;
+                      siteConfig.repoName = repo;
+                      
+                      // Save to GitHub
+                      saveConfigToGitHub(siteConfig);
+                      updateTokenWarning();
+                  }
+                  
+                  async function saveAdminCredentials() {
+                      const newUsername = document.getElementById('set-admin-user').value.trim();
+                      const newPassword = document.getElementById('set-admin-pass').value;
+                      const confirmPassword = document.getElementById('set-admin-pass-confirm').value;
+                      
+                      if (!newUsername) {
+                          return alert('Please enter a username!');
+                      }
+                      
+                      if (newPassword && newPassword !== confirmPassword) {
+                          return alert('Passwords do not match!');
+                      }
+                      
+                      if (newPassword && newPassword.length < 4) {
+                          return alert('Password must be at least 4 characters!');
+                      }
+                      
+                      // Update config
+                      siteConfig.adminUsername = newUsername;
+                      if (newPassword) {
+                          siteConfig.adminPassword = newPassword;
+                      }
+                      
+                      const saved = await saveConfigToGitHub(siteConfig);
+                      
+                      if (saved) {
+                          document.getElementById('admin-welcome').textContent = `Welcome, ${newUsername}!`;
+                          document.getElementById('set-admin-pass').value = '';
+                          document.getElementById('set-admin-pass-confirm').value = '';
+                          showStatus('✅ Credentials updated! Use new credentials next login.');
+                      }
+                  }
+                  
+                  async function saveSiteSettings() {
+                      const siteName = document.getElementById('set-site-name').value.trim();
+                      const tagline = document.getElementById('set-site-tagline').value.trim();
+                      const footer = document.getElementById('set-footer').value.trim();
+                      
+                      if (siteName) siteConfig.siteName = siteName;
+                      if (tagline) siteConfig.siteTagline = tagline;
+                      if (footer) siteConfig.footerText = footer;
+                      
+                      await saveConfigToGitHub(siteConfig);
+                  }
+                  
+                  async function saveThemeColors() {
+                      const primary = document.getElementById('set-primary-text').value.trim() || document.getElementById('set-primary-color').value;
+                      const secondary = document.getElementById('set-secondary-text').value.trim() || document.getElementById('set-secondary-color').value;
+                      
+                      siteConfig.primaryColor = primary;
+                      siteConfig.secondaryColor = secondary;
+                      
+                      await saveConfigToGitHub(siteConfig);
+                  }
               </script>
           </body>
           </html>
