@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Riyaaz Sir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #0f172a;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+        
+        .login-box h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .login-box p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        
+        /* Form Elements */
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-input);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: var(--text-muted);
+        }
+        
+        label {
+            display: block;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Dashboard Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            width: auto;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+        
+        .btn-outline:hover {
+            background: var(--border);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+        }
+        
+        .btn-success {
+            background: var(--success);
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: #000;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stat-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-live {
+            background: rgba(16,185,129,0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+        
+        .badge-hidden {
+            background: rgba(239,68,68,0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+        
+        /* Action Buttons */
+        .action-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            width: auto;
+            white-space: nowrap;
+        }
+        
+        /* Status Message */
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .status-bar.show {
+            display: block;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Help Panel */
+        .help-panel {
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .help-panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .help-panel ul {
+            margin-left: 20px;
+            color: var(--text-muted);
+        }
+        
+        .help-panel li {
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; gap: 15px; text-align: center; }
+            .header-actions { width: 100%; justify-content: center; }
+            .upload-grid { grid-template-columns: 1fr; }
+            .action-btns { justify-content: center; }
+            th, td { padding: 12px 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-container">
+        <div class="login-box">
+            <h1>🔐 Admin Portal</h1>
+            <p>Welcome back, Riyaaz Sir! Enter your GitHub Token to continue.</p>
+            <div>
+                <label>GitHub Token</label>
+                <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx...">
+            </div>
+            <button onclick="login()">🚀 Access Dashboard</button>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">Your token is stored securely in your browser only.</p>
+        </div>
+    </div>
+    
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboard" style="display: none;">
+        <div class="container">
+            
+            <!-- Header -->
+            <div class="header">
+                <div>
+                    <h1>👨‍🏫 Riyaaz Sir's Dashboard</h1>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Manage your learning portal</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-sm btn-outline" onclick="window.open('index.html', '_blank')">👁️ View Site</button>
+                    <button class="btn-sm btn-outline" onclick="toggleHelp()">❓ Help</button>
+                    <button class="btn-sm btn-danger" onclick="logout()">🚪 Logout</button>
+                </div>
+            </div>
+            
+            <!-- Help Panel (Hidden by default) -->
+            <div class="help-panel" id="help-panel" style="display: none;">
+                <h3>📖 Quick Guide for Riyaaz Sir</h3>
+                <ul>
+                    <li><strong>Upload:</strong> Fill in details and click "Publish" to add new papers</li>
+                    <li><strong>Edit:</strong> Change paper name, subject, or description anytime</li>
+                    <li><strong>Replace PDF:</strong> Upload a corrected PDF without changing the listing</li>
+                    <li><strong>Hide/Show:</strong> Temporarily hide papers before/after exams</li>
+                    <li><strong>Delete:</strong> Permanently remove papers from the website</li>
+                    <li><strong>Tip:</strong> Use consistent subject names (Physics, Chemistry, Maths)</li>
+                </ul>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon">📚</div>
+                    <div class="number" id="stat-total">0</div>
+                    <div class="label">Total Papers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">🟢</div>
+                    <div class="number" id="stat-live">0</div>
+                    <div class="label">Live Papers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">🔴</div>
+                    <div class="number" id="stat-hidden">0</div>
+                    <div class="label">Hidden Papers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">📁</div>
+                    <div class="number" id="stat-subjects">0</div>
+                    <div class="label">Subjects</div>
+                </div>
+            </div>
+            
+            <!-- Upload Section -->
+            <div class="card">
+                <h2>📤 Upload New Paper</h2>
+                <div class="upload-grid">
+                    <div>
+                        <label>Paper Name *</label>
+                        <input type="text" id="new-name" placeholder="e.g. Class 10 Physics Boards 2024">
+                    </div>
+                    <div>
+                        <label>Subject *</label>
+                        <input type="text" id="new-subject" placeholder="e.g. Physics">
+                    </div>
+                    <div>
+                        <label>PDF File *</label>
+                        <input type="file" id="new-file" accept=".pdf">
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label>Description (Optional)</label>
+                    <textarea id="new-desc" rows="2" placeholder="Add a short description for students..."></textarea>
+                </div>
+                <button id="upload-btn" onclick="uploadNewPaper()" style="margin-top: 10px;">🚀 Publish to Website</button>
+            </div>
+            
+            <!-- Manage Section -->
+            <div class="card">
+                <h2>🛠️ Manage Papers</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Subject</th>
+                                <th>Paper Name</th>
+                                <th>Uploaded</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paper-list">
+                            <tr><td colspan="5" style="text-align: center; padding: 40px;">Loading papers...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <h2>✏️ Edit Paper Details</h2>
+            <input type="hidden" id="edit-id">
+            <div>
+                <label>Paper Name</label>
+                <input type="text" id="edit-name">
+            </div>
+            <div>
+                <label>Subject</label>
+                <input type="text" id="edit-subject">
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea id="edit-desc" rows="3"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="closeModal('edit-modal')">Cancel</button>
+                <button onclick="saveEdit()">💾 Save Changes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Replace Modal -->
+    <div class="modal" id="replace-modal">
+        <div class="modal-content">
+            <h2>🔄 Replace PDF File</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a new PDF to replace the existing file. Students will automatically get the new version.</p>
+            <input type="hidden" id="replace-id">
+            <div>
+                <label>Select New PDF</label>
+                <input type="file" id="replace-file" accept=".pdf">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="closeModal('replace-modal')">Cancel</button>
+                <button id="replace-btn" onclick="confirmReplace()">📤 Upload New PDF</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Status Bar -->
+    <div class="status-bar" id="status-bar"></div>
+    
+    <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const REPO = 'rajaprogrammer/sample-papers';
+        // ==========================================
+        
+        let token = localStorage.getItem('riyaaz_token');
+        let dbSha = '';
+        let papersDb = [];
+        
+        const b64Encode = str => btoa(unescape(encodeURIComponent(str)));
+        const b64Decode = str => decodeURIComponent(escape(atob(str)));
+        
+        // Initialize
+        if (token) showDashboard();
+        
+        function login() {
+            token = document.getElementById('gh-token').value.trim();
+            if (!token) return alert("Please enter your token!");
+            localStorage.setItem('riyaaz_token', token);
+            showDashboard();
+        }
+        
+        function logout() {
+            localStorage.removeItem('riyaaz_token');
+            location.reload();
+        }
+        
+        async function showDashboard() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            await fetchDatabase();
+        }
+        
+        function showStatus(msg) {
+            const bar = document.getElementById('status-bar');
+            bar.textContent = msg;
+            bar.classList.add('show');
+            setTimeout(() => bar.classList.remove('show'), 4000);
+        }
+        
+        function toggleHelp() {
+            const panel = document.getElementById('help-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // ==========================================
+        // GITHUB API
+        // ==========================================
+        async function fetchDatabase() {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    dbSha = data.sha;
+                    papersDb = JSON.parse(b64Decode(data.content));
+                } else {
+                    papersDb = [];
+                }
+                updateStats();
+                renderPapers();
+            } catch (e) {
+                alert("Error loading database. Check your token.");
+                logout();
+            }
+        }
+        
+        async function saveDatabase() {
+            const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers.json`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${token}` },
+                body: JSON.stringify({
+                    message: "Update papers database",
+                    content: b64Encode(JSON.stringify(papersDb)),
+                    sha: dbSha || undefined
+                })
+            });
+            const data = await res.json();
+            dbSha = data.content.sha;
+            updateStats();
+            renderPapers();
+            showStatus("✅ Changes saved! Website updates in ~60 seconds.");
+        }
+        
+        async function uploadFileToGit(file, fileName) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    const b64 = e.target.result.split(',')[1];
+                    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/papers/${fileName}`, {
+                        method: 'PUT',
+                        headers: { 'Authorization': `token ${token}` },
+                        body: JSON.stringify({ message: `Upload ${fileName}`, content: b64 })
+                    });
+                    if (res.ok) resolve(`papers/${fileName}`);
+                    else reject("Upload failed");
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // ==========================================
+        // STATS & RENDERING
+        // ==========================================
+        function updateStats() {
+            const total = papersDb.length;
+            const live = papersDb.filter(p => p.visible !== false).length;
+            const hidden = total - live;
+            const subjects = [...new Set(papersDb.map(p => p.subject))].length;
+            
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-live').textContent = live;
+            document.getElementById('stat-hidden').textContent = hidden;
+            document.getElementById('stat-subjects').textContent = subjects;
+        }
+        
+        function renderPapers() {
+            const list = document.getElementById('paper-list');
+            
+            if (papersDb.length === 0) {
+                list.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-muted);">No papers uploaded yet. Start by uploading your first paper above!</td></tr>`;
+                return;
+            }
+            
+            list.innerHTML = papersDb.map(p => {
+                const isLive = p.visible !== false;
+                const date = new Date(p.id).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                
+                return `
+                    <tr style="opacity: ${isLive ? 1 : 0.6};">
+                        <td>
+                            <span class="badge ${isLive ? 'badge-live' : 'badge-hidden'}">
+                                ${isLive ? '🟢 Live' : '🔴 Hidden'}
+                            </span>
+                        </td>
+                        <td><strong style="color: var(--primary);">${p.subject}</strong></td>
+                        <td>
+                            <strong>${p.name}</strong>
+                            ${p.description ? `<br><small style="color: var(--text-muted);">${p.description.substring(0, 50)}...</small>` : ''}
+                        </td>
+                        <td style="color: var(--text-muted);">${date}</td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="action-btn btn-outline" onclick="openEditModal(${p.id})">✏️ Edit</button>
+                                <button class="action-btn btn-success" onclick="openReplaceModal(${p.id})">🔄 PDF</button>
+                                <button class="action-btn btn-warning" onclick="toggleVisibility(${p.id})">${isLive ? '🙈 Hide' : '👁️ Show'}</button>
+                                <button class="action-btn btn-danger" onclick="deletePaper(${p.id})">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // ==========================================
+        // ACTIONS
+        // ==========================================
+        async function uploadNewPaper() {
+            const name = document.getElementById('new-name').value.trim();
+            const subject = document.getElementById('new-subject').value.trim();
+            const desc = document.getElementById('new-desc').value.trim();
+            const fileInput = document.getElementById('new-file');
+            const btn = document.getElementById('upload-btn');
+            
+            if (!name || !subject || !fileInput.files.length) {
+                return alert("Please fill in all required fields!");
+            }
+            
+            btn.disabled = true;
+            btn.textContent = "⏳ Uploading...";
+            
+            try {
+                const file = fileInput.files[0];
+                const fileName = Date.now() + '.pdf';
+                const link = await uploadFileToGit(file, fileName);
+                
+                papersDb.unshift({
+                    id: Date.now(),
+                    name: name,
+                    subject: subject,
+                    description: desc,
+                    link: link,
+                    visible: true
+                });
+                
+                await saveDatabase();
+                
+                // Clear form
+                document.getElementById('new-name').value = '';
+                document.getElementById('new-subject').value = '';
+                document.getElementById('new-desc').value = '';
+                fileInput.value = '';
+                
+            } catch (e) {
+                alert("Upload failed: " + e);
+            }
+            
+            btn.disabled = false;
+            btn.textContent = "🚀 Publish to Website";
+        }
+        
+        async function toggleVisibility(id) {
+            const paper = papersDb.find(p => p.id === id);
+            paper.visible = paper.visible === false ? true : false;
+            await saveDatabase();
+        }
+        
+        async function deletePaper(id) {
+            if (!confirm("⚠️ Are you sure you want to permanently delete this paper?")) return;
+            papersDb = papersDb.filter(p => p.id !== id);
+            await saveDatabase();
+        }
+        
+        // ==========================================
+        // EDIT MODAL
+        // ==========================================
+        function openEditModal(id) {
+            const paper = papersDb.find(p => p.id === id);
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-name').value = paper.name;
+            document.getElementById('edit-subject').value = paper.subject;
+            document.getElementById('edit-desc').value = paper.description || '';
+            document.getElementById('edit-modal').classList.add('show');
+        }
+        
+        async function saveEdit() {
+            const id = parseInt(document.getElementById('edit-id').value);
+            const paper = papersDb.find(p => p.id === id);
+            
+            paper.name = document.getElementById('edit-name').value.trim();
+            paper.subject = document.getElementById('edit-subject').value.trim();
+            paper.description = document.getElementById('edit-desc').value.trim();
+            
+            closeModal('edit-modal');
+            await saveDatabase();
+        }
+        
+        // ==========================================
+        // REPLACE MODAL
+        // ==========================================
+        function openReplaceModal(id) {
+            document.getElementById('replace-id').value = id;
+            document.getElementById('replace-file').value = '';
+            document.getElementById('replace-modal').classList.add('show');
+        }
+        
+        async function confirmReplace() {
+            const id = parseInt(document.getElementById('replace-id').value);
+            const fileInput = document.getElementById('replace-file');
+            const btn = document.getElementById('replace-btn');
+            
+            if (!fileInput.files.length) return alert("Please select a PDF file!");
+            
+            btn.disabled = true;
+            btn.textContent = "⏳ Uploading...";
+            
+            try {
+                const file = fileInput.files[0];
+                const fileName = 'r' + Date.now() + '.pdf';
+                const newLink = await uploadFileToGit(file, fileName);
+                
+                const paper = papersDb.find(p => p.id === id);
+                paper.link = newLink;
+                
+                closeModal('replace-modal');
+                await saveDatabase();
+                
+            } catch (e) {
+                alert("Replace failed: " + e);
+            }
+            
+            btn.disabled = false;
+            btn.textContent = "📤 Upload New PDF";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+        
+        // Close modal on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riyaaz Sir | Study Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --bg: #f8fafc;
+            --bg-card: rgba(255,255,255,0.8);
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --bg-card: rgba(30,41,59,0.8);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(99,102,241,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(118,75,162,0.1) 0%, transparent 50%);
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, 2%) rotate(90deg); }
+            50% { transform: translate(0, 4%) rotate(180deg); }
+            75% { transform: translate(-2%, 2%) rotate(270deg); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            padding: 80px 20px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--bg);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: -60px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 40px;
+        }
+        
+        .search-wrapper {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+        }
+        
+        .search-bar::placeholder {
+            color: var(--text-muted);
+        }
+        
+        /* Filter Tags */
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .filter-tag {
+            padding: 8px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Grid */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .new-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+            line-height: 1.4;
+        }
+        
+        .description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .empty-state p {
+            color: var(--text-muted);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 20px 100px; }
+            .hero-stats { gap: 25px; }
+            .stat-number { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .container { margin-top: -40px; }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            grid-column: 1 / -1;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <span id="theme-icon">🌙</span>
+    </button>
+    
+    <div class="hero">
+        <div class="hero-content">
+            <h1>👨‍🏫 Riyaaz Sir's Portal</h1>
+            <p>Your gateway to success. Download premium study materials and ace your exams!</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number" id="total-papers">0</div>
+                    <div class="stat-label">Papers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="total-subjects">0</div>
+                    <div class="stat-label">Subjects</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="search-section">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search" class="search-bar" placeholder="Search papers by name or subject..." onkeyup="filterPapers()">
+            </div>
+            <div class="filter-tags" id="filter-tags">
+                <span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>
+            </div>
+        </div>
+        
+        <h2 class="section-title">📄 Available Papers</h2>
+        
+        <div class="grid" id="paper-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Made with ❤️ for <strong>Riyaaz Sir's Students</strong></p>
+        <p style="margin-top: 5px; font-size: 0.8rem;">© 2024 All rights reserved</p>
+    </div>
+    
+    <script>
+        let allPapers = [];
+        let currentFilter = 'all';
+        
+        // Theme Management
+        function initTheme() {
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            updateThemeIcon(saved);
+        }
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateThemeIcon(next);
+        }
+        
+        function updateThemeIcon(theme) {
+            document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // Load Papers
+        async function loadPapers() {
+            try {
+                const res = await fetch('papers.json?t=' + Date.now());
+                allPapers = await res.json();
+                updateStats();
+                buildFilterTags();
+                renderPapers(allPapers);
+            } catch (e) {
+                document.getElementById('paper-grid').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>Coming Soon!</h3>
+                        <p>Papers are being uploaded. Check back later!</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateStats() {
+            const visible = allPapers.filter(p => p.visible !== false);
+            const subjects = [...new Set(visible.map(p => p.subject))];
+            document.getElementById('total-papers').textContent = visible.length;
+            document.getElementById('total-subjects').textContent = subjects.length;
+        }
+        
+        function buildFilterTags() {
+            const visible = allPapers.filter(p => p.visible !== false);
+            const subjects = [...new Set(visible.map(p => p.subject))];
+            const container = document.getElementById('filter-tags');
+            
+            container.innerHTML = `<span class="filter-tag active" data-subject="all" onclick="filterBySubject('all', this)">All Papers</span>`;
+            
+            subjects.forEach(sub => {
+                container.innerHTML += `<span class="filter-tag" data-subject="${sub}" onclick="filterBySubject('${sub}', this)">${sub}</span>`;
+            });
+        }
+        
+        function filterBySubject(subject, el) {
+            currentFilter = subject;
+            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            filterPapers();
+        }
+        
+        function filterPapers() {
+            const query = document.getElementById('search').value.toLowerCase();
+            let filtered = allPapers.filter(p => p.visible !== false);
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(p => p.subject === currentFilter);
+            }
+            
+            if (query) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    (p.subject && p.subject.toLowerCase().includes(query)) ||
+                    (p.description && p.description.toLowerCase().includes(query))
+                );
+            }
+            
+            renderPapers(filtered);
+        }
+        
+        function isNew(timestamp) {
+            const threeDays = 3 * 24 * 60 * 60 * 1000;
+            return Date.now() - timestamp < threeDays;
+        }
+        
+        function renderPapers(papers) {
+            const grid = document.getElementById('paper-grid');
+            
+            if (papers.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>No Papers Found</h3>
+                        <p>Try a different search term or filter.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = papers.map(paper => {
+                const date = new Date(paper.id).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                return `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="tag">📚 ${paper.subject || 'General'}</span>
+                            ${isNew(paper.id) ? '<span class="new-badge">✨ NEW</span>' : ''}
+                        </div>
+                        <h3 class="title">${paper.name}</h3>
+                        <p class="description">${paper.description || 'Download this sample paper to boost your preparation!'}</p>
+                        <div class="meta">
+                            <span class="meta-item">📅 ${date}</span>
+                            <span class="meta-item">📄 PDF</span>
+                        </div>
+                        <a href="${paper.link}" class="download-btn" download>
+                            <span>📥</span> Download Now
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Initialize
+        initTheme();
+        loadPapers();
+    </script>
+</body>
+</html>
